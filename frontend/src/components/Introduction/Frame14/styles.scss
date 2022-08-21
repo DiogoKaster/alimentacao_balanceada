@@ -1,0 +1,16 @@
+#frame-14 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+
+    #plate-img {
+        position: absolute;
+        z-index: -1;
+        height: 80vh;
+        top: 15%;
+        left: 30%;
+    }
+}

@@ -1,0 +1,56 @@
+#home {
+
+    header {
+        height: 30%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+        }
+    }
+
+
+    img {
+        height: 12rem;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        padding: 10%;
+        height: 60%;
+        width: 70%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    #game-mode-form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        align-self: flex-start;
+
+        width: 16vw;
+    }
+
+    #game-mode-switch {
+        height: 4vh;
+        width: 7vw;
+        margin-top: 0;
+    }
+
+    label {
+        font-size: 1.3rem;
+    }
+
+    button {
+        width: 22vw;
+        margin: 7vh auto 0 auto;
+    }
+}
