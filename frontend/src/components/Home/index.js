@@ -1,19 +1,24 @@
-import React, { } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import dseImg from '../../imgs/dse.png'
 import lesicImg from '../../imgs/lesic.png'
-import { toggleGameMode } from '../../redux/game'
+import { resetGameMode, toggleGameMode } from '../../redux/game'
 import './styles.scss'
 
 function Home() {
 
+    const gameMode = useSelector((state) => state.game.gameMode)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(resetGameMode())
+    }, [])
 
     function handleGameModeSwitchChange() {
         dispatch(toggleGameMode())
-    } 
+    }
 
     return (
         <article id='home'>
@@ -33,9 +38,11 @@ function Home() {
                     <label>Professor</label>
                 </Form>
 
-                <Link to='/menu'><Button variant='success'>Iniciar</Button></Link>
-            </main>
-        </article>
+                <Link to={gameMode === 'student' ? '/menu' : '/login'}>
+                <Button variant='success'>Iniciar</Button>
+            </Link>
+        </main>
+        </article >
     )
 }
 

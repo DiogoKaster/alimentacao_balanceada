@@ -21,8 +21,16 @@ function Menu() {
             <main>
                 <div id='buttons'>
                     <Link to='/introduction'><button>Introdução</button></Link>
-                    <Link to='/drag-and-drop'><button>Arraste-e-solte</button></Link>
-                    <Link to='/quiz'><button>Quiz</button></Link>
+                    {
+                        gameMode === 'student' ?
+                            <>
+                                <Link to='/drag-and-drop'><button>Arraste-e-solte</button></Link>
+                                <Link to='/quiz'><button>Quiz</button></Link>
+                            </> :
+                            <>
+                                <Link to='/add-images'><button>Adicionar imagens</button></Link>
+                            </>
+                    }
                     <Link to='/about'><button>Sobre</button></Link>
                 </div>
 

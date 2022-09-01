@@ -3,6 +3,8 @@ import Home from './components/Home'
 import Menu from './components/Menu'
 import Quiz from './components/Quiz'
 import About from './components/About'
+import TeacherLogin from './components/TeacherLogin'
+import TeacherRegister from './components/TeacherRegister'
 import AddImages from './components/AddImages'
 import Introduction from './components/Introduction'
 import useConfigureFoods from './hooks/useConfigureFoods'
@@ -19,6 +21,8 @@ function App() {
         <Route path='/menu' element={<Menu />} />
         <Route path='/introduction' element={<Introduction />} />
         <Route path='/quiz' element={<Quiz />} />
+        <Route path='/login' element={<TeacherLogin />} />
+        <Route path='/register' element={<TeacherRegister />} />
         <Route path='/about' element={<About />} />
         <Route path='/add-images' element={<AddImages />} />
       </Routes>
