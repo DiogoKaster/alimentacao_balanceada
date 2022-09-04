@@ -6,6 +6,7 @@ import About from './components/About'
 import TeacherLogin from './components/TeacherLogin'
 import TeacherRegister from './components/TeacherRegister'
 import AddImages from './components/AddImages'
+import Images from './components/Images'
 import Introduction from './components/Introduction'
 import useConfigureFoods from './hooks/useConfigureFoods'
 import './App.scss'
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={<TeacherLogin />} />
         <Route path='/register' element={<TeacherRegister />} />
         <Route path='/about' element={<About />} />
+        <Route path='/images' element={<Images />} />
         <Route path='/add-images' element={<AddImages />} />
       </Routes>
     </div>

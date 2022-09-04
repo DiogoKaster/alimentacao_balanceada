@@ -1,0 +1,22 @@
+#quiz {
+
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        text-align: center;
+    }
+
+    #quiz-options {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        flex-grow: 1;
+
+        .icon {
+            cursor: pointer;
+        }
+    }
+}

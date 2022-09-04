@@ -23,8 +23,6 @@ const buttonContainerStyles = {
 const buttonStyles = {
     width: '13vw',
     margin: '0',
-    justifySelf: 'end',
-    alignSelf: 'flex-end',
 }
 
 function useForm(btn1Txt, btn2Txt, btn1Callback, btn2Callback) {
