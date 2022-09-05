@@ -4,6 +4,8 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState: {
         gameMode: 'student',
+        login: true,
+        loginEmail: null
     },
     reducers: {
         resetGameMode: (state) => {
@@ -13,9 +15,13 @@ export const gameSlice = createSlice({
             state.gameMode = state.gameMode === 'student' ? 
                             'professor' : 'student'
         },
+        login: (state, action) => {
+            state.login = true
+            state.loginEmail = action.payload
+        }
     }
 })
 
-export const { toggleGameMode, resetGameMode } = gameSlice.actions
+export const { toggleGameMode, resetGameMode, login } = gameSlice.actions
 
 export default gameSlice.reducer

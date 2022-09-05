@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { submitImage2Database } from '../../api/submitImage2Database'
 import './styles.scss'
@@ -12,7 +13,15 @@ function AddImages() {
     const [protsCheckboxValue, setProtsCheckboxValue] = useState(false)
     const [fatsCheckboxValue, setFatsCheckboxValue] = useState(false)
 
+    const gameMode = useSelector((state) => state.game.gameMode)
+    const login = useSelector((state) => state.game.login)
+
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (gameMode === 'student' || !login)
+            navigate('/menu')
+    }, [])
 
     useEffect(() => {
         if (errorMsg === '')

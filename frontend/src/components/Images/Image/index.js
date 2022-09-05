@@ -8,10 +8,11 @@ function Image({ imageSrc }) {
 
     const [showCloseButton, setShowCloseButton] = useState(false)
     const gameMode = useSelector((state) => state.game.gameMode)
+    const login = useSelector((state) => state.game.login)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (gameMode === 'student')
+        if (gameMode === 'student' || !login)
             navigate('/menu')
     }, [])
 
