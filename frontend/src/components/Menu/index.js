@@ -31,7 +31,7 @@ function Menu() {
                                 <Link to='/quiz'><button>Quiz</button></Link>
                             </> :
                             <>
-                                <Link to='/images'><button>Adicionar imagens</button></Link>
+                                <Link to='/images'><button>Imagens</button></Link>
                             </>
                     }
                     <Link to='/about'><button>Sobre</button></Link>

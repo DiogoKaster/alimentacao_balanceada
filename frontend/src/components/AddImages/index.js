@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { submitImage2Database } from '../../api/submitImage2Database'
@@ -13,6 +13,17 @@ function AddImages() {
     const [fatsCheckboxValue, setFatsCheckboxValue] = useState(false)
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (errorMsg === '')
+            return
+
+        setTimeout(() => {
+            setErrorMsg('')
+        }, 4000)
+
+    }, [errorMsg])
+
 
     function handleFileChange(e) {
         const fileName = e.target.files['0'].name
@@ -29,7 +40,12 @@ function AddImages() {
     }
 
     function handleSubmitBtnClick() {
-        submitImage2Database(imageFile, carbsCheckboxValue, 
+        if (imageFile == null) {
+            setErrorMsg('Escolha uma imagem para submeter.')
+            return
+        }
+
+        submitImage2Database(imageFile, carbsCheckboxValue,
             protsCheckboxValue, fatsCheckboxValue)
 
         navigate('/images')

@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { deleteImageFromDatabase } from '../../../api/deleteImageFromDatabase'
 import './styles.scss'
 
 function Image({ imageSrc }) {
 
     const [showCloseButton, setShowCloseButton] = useState(false)
+    const gameMode = useSelector((state) => state.game.gameMode)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (gameMode === 'student')
+            navigate('/menu')
+    }, [])
 
     function handleMenuClick() {
         deleteImageFromDatabase(imageSrc)
