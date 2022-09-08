@@ -8,7 +8,6 @@ function useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(answer)
         if (!answer)
             return
 

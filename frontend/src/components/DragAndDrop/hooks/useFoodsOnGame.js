@@ -29,7 +29,6 @@ function useFoodsOnGame() {
             if (isOverlapping) {
                 const isAnsCorrect = initialAnswer[type] === 0
                 const wasItAlreadyInsidePlate = answer[type] === 1
-                console.log('original', initialAnswer[type])
                 if (isAnsCorrect) {
                     if (!wasItAlreadyInsidePlate) dispatch(increaseAnswer(type))
                 }

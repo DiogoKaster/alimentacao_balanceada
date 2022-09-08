@@ -4,7 +4,11 @@ import Feedback from '../Feedback'
 import useAnswer from './hooks/useAnswer'
 import useFoodsOnGame from './hooks/useFoodsOnGame'
 import Plate from './Plate'
+import audio1 from './../../audios/d&d-1.wav'
+import audio2 from './../../audios/d&d-2.wav'
+import audio3 from './../../audios/d&d-3.wav'
 import './styles.scss'
+import usePlayAudio from '../../hooks/usePlayAudio'
 
 /*
     If it's missing 1 food, the missing food will be a fat
@@ -20,19 +24,36 @@ function DragAndDrop() {
 
     const [round, setRound] = useState(0)
     const [showFeedback, setShowFeedback] = useState(false)
-    
-    const setUpAnswer = 
+    const [curAudioBeingPlayed, setCurAudioBeingPlayed] = useState()
+
+    const setUpAnswer =
         useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound)
 
     const [mapFoodsOnGameToFoods, setUpFoodsState] = useFoodsOnGame()
 
     const navigate = useNavigate()
 
+    usePlayAudio(curAudioBeingPlayed)
+
     useEffect(() => {
         setUpFoodsState()
         setUpAnswer()
     }, [round])
-    
+
+    useEffect(() => {
+        if (!showFeedback)
+            setUpAudio()
+    }, [showFeedback])
+
+    function setUpAudio() {
+        if (round === 0)
+            setCurAudioBeingPlayed(audio1)
+        if (round === 2)
+            setCurAudioBeingPlayed(audio2)
+        if (round === 4)
+            setCurAudioBeingPlayed(audio3)
+    }
+
     function howMuchFoodIsMissing() {
         const isItMissing1Food = (round === 0 || round === 1)
         const isItMissing2Foods = (round === 2 || round === 3)
@@ -48,9 +69,9 @@ function DragAndDrop() {
 
     function isDragAndDropOver() {
         return round === 5
-    } 
+    }
 
-    function increaseRound()  {
+    function increaseRound() {
         setRound((state) => state + 1)
     }
 
