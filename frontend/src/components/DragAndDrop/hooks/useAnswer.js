@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { initiateAnswer } from '../../../redux/answer'
 
 function useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound) {
 
-    const [answer, setAnswer] = useState()
+    const answer = useSelector((state) => state.answer.answer)
+    const dispatch = useDispatch()
 
     useEffect(() => {
+        console.log(answer)
         if (!answer)
             return
 
@@ -22,49 +26,31 @@ function useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound) {
     function setUpAnswer() {
         switch (howMuchFoodIsMissing()) {
             case 1:
-                setAnswer({
+                dispatch(initiateAnswer({
                     carbs: 1,
                     prots: 1,
                     fats: 0
-                })
+                }))
                 break
             case 2:
-                setAnswer({
+                dispatch(initiateAnswer({
                     carbs: 1,
                     prots: 0,
                     fats: 0
-                })
+                }))
                 break
             case 3:
-                setAnswer({
+                dispatch(initiateAnswer({
                     carbs: 0,
                     prots: 0,
                     fats: 0
-                })
+                }))
                 break
             default:
         }
     }
 
-    function increaseAnswer(type) {
-        setAnswer((state) => {
-            const newState = { ...state }
-            newState[type] = state[type] + 1
-
-            return newState
-        })
-    }
-
-    function decreaseAnswer(type) {
-        setAnswer((state) => {
-            const newState = { ...state }
-            newState[type] = state[type] + 1
-
-            return newState
-        })
-    }
-
-    return [setUpAnswer, increaseAnswer, decreaseAnswer]
+    return setUpAnswer
 }
 
 export default useAnswer

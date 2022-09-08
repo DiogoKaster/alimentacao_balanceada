@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { decreaseAnswer, increaseAnswer } from '../../../redux/answer'
 import DraggableFood from '../DraggableFood'
 
-function useFoodsOnGame(increaseAnswer, decreaseAnswer) {
+function useFoodsOnGame() {
 
     const [foodsOnGame, setFoodsOnGame] = useState([])
 
@@ -10,6 +11,9 @@ function useFoodsOnGame(increaseAnswer, decreaseAnswer) {
     const prots = useSelector((state) => state.foods.prots)
     const fats = useSelector((state) => state.foods.fats)
 
+    const answer = useSelector((state) => state.answer.answer)
+    const initialAnswer = useSelector((state) => state.answer.initialAnswer)
+    const dispatch = useDispatch()
 
     function setUpFoodsState() {
         setFoodsOnGame([
@@ -19,35 +23,43 @@ function useFoodsOnGame(increaseAnswer, decreaseAnswer) {
         ])
     }
 
-    function handleOverlapping(isOverlapping, imgSrc) {
+    function handleOverlapping(isOverlapping, imgSrc, resetFoodPosition) {
+
+        function changeAnswer(type) {
+            if (isOverlapping) {
+                const isAnsCorrect = initialAnswer[type] === 0
+                const wasItAlreadyInsidePlate = answer[type] === 1
+                console.log('original', initialAnswer[type])
+                if (isAnsCorrect) {
+                    if (!wasItAlreadyInsidePlate) dispatch(increaseAnswer(type))
+                }
+                else
+                    resetFoodPosition()
+            } else {
+                const wasAnsCorrect =
+                    answer[type] === 1 && initialAnswer[type] === 0
+                console.log(wasAnsCorrect)
+                if (wasAnsCorrect)
+                    dispatch(decreaseAnswer(type))
+            }
+
+        }
 
         const isFoodCarb = carbs.includes(imgSrc)
-        if (isFoodCarb) {
-            if (isOverlapping)
-                increaseAnswer('carbs')
-            else
-                decreaseAnswer('carbs')
-        }
+        if (isFoodCarb) changeAnswer('carbs')
+
         const isFoodProt = prots.includes(imgSrc)
-        if (isFoodProt) {
-            if (isOverlapping)
-                increaseAnswer('prots')
-            else
-                decreaseAnswer('prots')
-        }
+        if (isFoodProt) changeAnswer('prots')
+
         const isFoodFat = fats.includes(imgSrc)
-        if (isFoodFat) {
-            if (isOverlapping)
-                increaseAnswer('fats')
-            else
-                decreaseAnswer('fats')
-        }
+        if (isFoodFat) changeAnswer('fats')
     }
 
-    const mapFoodsOnGameToFoods = () => foodsOnGame.map((food) => (
-        <DraggableFood imgSrc={food}
+    const mapFoodsOnGameToFoods = () => foodsOnGame.map((food, idx) => (
+        <DraggableFood imgSrc={food} key={idx}
             overlappingObjectBoundingClass='drag-and-drop-plate'
             isOverlappingCallback={handleOverlapping}
+            top={`${16 * idx}%`}
         />
     ))
 

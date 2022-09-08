@@ -9,12 +9,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import game from './redux/game';
 import foods from './redux/foods';
 import animation from './redux/animation';
+import answer from './redux/answer';
 
 const store = configureStore({
   reducer: {
     'game': game,
     'foods': foods,
-    'animation': animation
+    'animation': animation,
+    'answer': answer
   }
 })
 

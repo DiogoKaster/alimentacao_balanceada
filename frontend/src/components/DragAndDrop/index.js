@@ -21,11 +21,10 @@ function DragAndDrop() {
     const [round, setRound] = useState(0)
     const [showFeedback, setShowFeedback] = useState(false)
     
-    const [setUpAnswer, increaseAnswer, decreaseAnswer] = useAnswer(howMuchFoodIsMissing,
-        setShowFeedback, increaseRound)
+    const setUpAnswer = 
+        useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound)
 
-    const [mapFoodsOnGameToFoods, setUpFoodsState] = useFoodsOnGame(increaseAnswer, 
-        decreaseAnswer)
+    const [mapFoodsOnGameToFoods, setUpFoodsState] = useFoodsOnGame()
 
     const navigate = useNavigate()
 
