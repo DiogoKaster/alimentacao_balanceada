@@ -1,27 +1,29 @@
 import React, { useState } from 'react'
 import { Alert } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { checkIfEmailExists } from '../../api/checkIfEmailExists'
-import { checkLoginValidity } from '../../api/checkLoginValidity'
-import { registerAccount } from '../../api/registerAccount'
+import checkIfEmailExists from '../../api/checkIfEmailExists'
+import registerAccount from '../../api/registerAccount'
 import useForm from '../../hooks/useForm'
+import { login } from '../../redux/game'
 import './styles.scss'
 
 function TeacherRegister() {
 
     const [showLoginErrorAlert, setShowLoginErrorAlert] = useState()
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [formJsx, emailValue, passwordValue] = useForm('Voltar', 'Registar',
         handleReturnBtnClick, handleRegisterBtnClick)
 
-    function handleRegisterBtnClick() {
-        const doesEmailExists = checkIfEmailExists()
+    async function handleRegisterBtnClick() {
+        const doesEmailExists = await checkIfEmailExists(emailValue)
         if (doesEmailExists)
             setShowLoginErrorAlert(true)
         else {
-            registerAccount(emailValue, passwordValue)
+            await registerAccount(emailValue, passwordValue)
+            dispatch(login(emailValue))
             navigate('/menu')
         }
     }

@@ -27,8 +27,8 @@ const buttonStyles = {
 
 function useForm(btn1Txt, btn2Txt, btn1Callback, btn2Callback) {
 
-    const [emailValue, setEmailValue] = useState()
-    const [passwordValue, setPasswordValue] = useState()
+    const [emailValue, setEmailValue] = useState('')
+    const [passwordValue, setPasswordValue] = useState('')
 
     const formJsx = (
         <div id='form' style={formStyle}>

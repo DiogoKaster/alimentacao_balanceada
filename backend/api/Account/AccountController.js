@@ -13,12 +13,12 @@ class AccountController {
         this.router.route('/account')
             .get(async (req, res) => {
                 try {
-                    const account = new Account(req.params)
-                    await this.service.findOne(account)
+                    const account = new Account(req.query)
+                    const credentialsMatch = await this.service.findOne(account)
                     
                     res.json({
                         'code': 200,
-
+                        'login': credentialsMatch ? true : false
                     })
                 } catch (err) {
                     res.json({

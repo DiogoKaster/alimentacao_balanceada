@@ -6,7 +6,7 @@ import './styles.scss'
 function Frame7() {
 
     const carbs = useSelector((state) => state.foods.carbs)
-    useChangeFrameAfterInterval(2)
+    useChangeFrameAfterInterval(4)
 
     return (
         <div id='frame-7'>
@@ -15,8 +15,8 @@ function Frame7() {
             </ul>
 
             <div>
-                <img src={require(carbs[2])} alt='Carboidrato 3' className='icon' />
-                <img src={require(carbs[3])} alt='Carboidrato 4' className='icon' />
+                <img src={carbs[2]} alt='Carboidrato 3' className='icon' />
+                <img src={carbs[3]} alt='Carboidrato 4' className='icon' />
             </div>
         </div>
     )

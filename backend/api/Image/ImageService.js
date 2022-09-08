@@ -2,6 +2,8 @@
 // throw exceptions in case of errors
 // will talk with the data access layer
 
+const fs = require('fs')
+const path = require('path')
 const Image = require('./Image')
 const ImageRepository = require('./ImageRepository')
 
@@ -23,7 +25,15 @@ class ImageService {
         if (!imageExists)
             throw new Error('Filename doesn\'t exist')
 
+        console.log('123')
+        fs.unlinkSync(
+            path.join(__dirname, '..', '..', 'uploads', image.filename)
+        )
+        console.log('321')
+        
         await this.repository.deleteByFilename(image)
+        console.log('132')
+
     }
 
 
@@ -36,15 +46,15 @@ class ImageService {
             prots: img['is_it_prots'],
             fats: img['is_it_fats'],
         }))
-        
+
         function filterImages(type) {
             const imagesFiltered = imagesMapped.filter((img) => {
                 return img[`isIt${type}`]
             })
-            
+
             return imagesFiltered
         }
-        
+
         return [filterImages('Carbs'), filterImages('Prots'), filterImages('Fats')]
     }
 

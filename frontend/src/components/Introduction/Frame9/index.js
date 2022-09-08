@@ -16,8 +16,8 @@ function Frame9() {
             </ul>
 
             <div>
-                <img src={require(prots[0])} alt='Proteína 1' className='icon' />
-                <img src={require(prots[1])} alt='Proteína 2' className='icon' />
+                <img src={prots[0]} alt='Proteína 1' className='icon' />
+                <img src={prots[1]} alt='Proteína 2' className='icon' />
             </div>
         </div>
     )

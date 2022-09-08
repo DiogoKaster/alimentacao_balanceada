@@ -111,7 +111,7 @@ function Quiz() {
                         <div id='quiz-options'>
                             {
                                 quizOptions.map((option, idx) => (
-                                    <img src={require(option)}
+                                    <img src={option}
                                         alt={`Opção ${idx + 1}`}
                                         className='icon'
                                         onClick={() => handleOptionClick(option)} />

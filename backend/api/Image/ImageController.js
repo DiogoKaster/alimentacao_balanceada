@@ -1,7 +1,16 @@
 const Image = require("./Image")
 const ImageService = require("./ImageService")
 const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '.svg')
+    }
+})
+const upload = multer({ storage: storage })
 
 class ImageController {
     constructor(router, dbClient) {
@@ -21,7 +30,7 @@ class ImageController {
                     })
                     await this.service.addOne(image)
 
-                    res.redirect('/add-images')
+                    res.redirect('/#/add-images')
 
                 } catch (err) {
                     res.json({
@@ -33,12 +42,10 @@ class ImageController {
             .delete(async (req, res) => {
                 try {
                     const image = new Image(req.query)
-
                     await this.service.deleteOne(image)
 
                     res.json({
-                        'code': 200,
-
+                        'code': 200
                     })
                 } catch (err) {
                     res.json({

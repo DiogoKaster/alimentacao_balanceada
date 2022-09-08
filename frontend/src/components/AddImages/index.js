@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import useConfigureFoods from '../../hooks/useConfigureFoods'
 import './styles.scss'
 
 function AddImages() {
@@ -15,6 +16,8 @@ function AddImages() {
     const login = useSelector((state) => state.game.login)
 
     const navigate = useNavigate()
+
+    useConfigureFoods()
 
     useEffect(() => {
         if (gameMode === 'student' || !login)
@@ -49,6 +52,7 @@ function AddImages() {
     function handleSubmitBtnClick(e) {
         if (imageFile == null) {
             setErrorMsg('Escolha uma imagem para submeter.')
+            e.preventDefault()
             return
         }
 

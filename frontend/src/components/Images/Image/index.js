@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { deleteImageFromDatabase } from '../../../api/deleteImageFromDatabase'
+import deleteImageFromDatabase from '../../../api/deleteImageFromDatabase'
 import './styles.scss'
 
 function Image({ imageSrc }) {
@@ -16,8 +16,8 @@ function Image({ imageSrc }) {
             navigate('/menu')
     }, [])
 
-    function handleMenuClick() {
-        deleteImageFromDatabase(imageSrc)
+    async function handleMenuClick() {
+        await deleteImageFromDatabase(imageSrc)
     }
 
 
@@ -29,7 +29,7 @@ function Image({ imageSrc }) {
         <div className='image'>
             {
                 showCloseButton &&
-                <Link to='/menu'>
+                <Link to='/'>
                     <div className='menu' onClick={handleMenuClick}>
                         Excluir
                     </div>
@@ -37,7 +37,7 @@ function Image({ imageSrc }) {
             }
 
             <img className='icon'
-                src={require(imageSrc)} alt='food' onClick={handleClick} />
+                src={imageSrc} alt='food' onClick={handleClick} />
 
         </div>
     )

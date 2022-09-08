@@ -24,7 +24,7 @@ class AccountService {
 
         const accountExists = querySearchByEmail.rowCount === 1
         if (!accountExists)
-            throw new Error('Account does not already exists')
+            throw new Error('Account doesn\'t exist')
 
         const fetchedPassword = querySearchByEmail['rows'][0]['password']
         const doCredentialsMatch = account.password === fetchedPassword

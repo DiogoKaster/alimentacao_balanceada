@@ -16,6 +16,7 @@ export const gameSlice = createSlice({
                             'professor' : 'student'
         },
         login: (state, action) => {
+            state.gameMode = 'professor'
             state.login = true
             state.loginEmail = action.payload
         }

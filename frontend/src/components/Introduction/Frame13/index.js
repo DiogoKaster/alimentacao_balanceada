@@ -6,7 +6,7 @@ import './styles.scss'
 function Frame13() {
 
     const fats = useSelector((state) => state.foods.fats)
-    useChangeFrameAfterInterval(2)
+    useChangeFrameAfterInterval(4)
 
     return (
         <div id='frame-13'>
@@ -15,8 +15,8 @@ function Frame13() {
             </ul>
 
             <div>
-                <img src={require(fats[2])} alt='Gordura 3' className='icon' />
-                <img src={require(fats[3])} alt='Gordura 4' className='icon' />
+                <img src={fats[2]} alt='Gordura 3' className='icon' />
+                <img src={fats[3]} alt='Gordura 4' className='icon' />
             </div>
         </div>
     )

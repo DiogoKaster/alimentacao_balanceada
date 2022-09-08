@@ -6,7 +6,7 @@ import './styles.scss'
 function Frame11() {
 
     const prots = useSelector((state) => state.foods.prots)
-    useChangeFrameAfterInterval(2)
+    useChangeFrameAfterInterval(4)
 
     return (
         <div id='frame-11'>
@@ -15,8 +15,8 @@ function Frame11() {
             </ul>
 
             <div>
-                <img src={require(prots[4])} alt='Proteína 5' className='icon' />
-                <img src={require(prots[5])} alt='Proteína 6' className='icon' />
+                <img src={prots[4]} alt='Proteína 5' className='icon' />
+                <img src={prots[5]} alt='Proteína 6' className='icon' />
             </div>
         </div>
     )

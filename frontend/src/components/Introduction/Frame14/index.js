@@ -16,9 +16,9 @@ function Frame14() {
         <div id='frame-14'>
                 <img id='plate-img' src={plateImg} alt='Prato' />
 
-                <img src={require(carbs[0])} alt='Carboidrato' className='icon' />
-                <img src={require(prots[0])} alt='Proteína' className='icon' />
-                <img src={require(fats[0])} alt='Gordura' className='icon' />
+                <img src={carbs[0]} alt='Carboidrato' className='icon' />
+                <img src={prots[0]} alt='Proteína' className='icon' />
+                <img src={fats[0]} alt='Gordura' className='icon' />
         </div>
     )
 }

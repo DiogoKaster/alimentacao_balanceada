@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { Alert, Button, Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlinePlus } from 'react-icons/ai';
-import { deleteImageFromDatabase } from '../../api/deleteImageFromDatabase'
 import './styles.scss'
 import Image from './Image';
 
