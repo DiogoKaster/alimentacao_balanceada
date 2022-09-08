@@ -37,7 +37,7 @@ function DraggableFood({ imgSrc, overlappingObjectBoundingClass, isOverlappingCa
 
     return (
         <Draggable draggable={true} onStop={forceUpdate}>
-            <img src={imgSrc} alt='Comida' className='draggable-food'
+            <img src={require(imgSrc)} alt='Comida' className='draggable-food'
                 ref={componentRef} />
         </Draggable>
     )

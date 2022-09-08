@@ -16,8 +16,8 @@ function Frame12() {
             </ul>
 
             <div>
-                <img src={fats[0]} alt='Gordura 1' className='icon' />
-                <img src={fats[1]} alt='Gordura 2' className='icon' />
+                <img src={require(fats[0])} alt='Gordura 1' className='icon' />
+                <img src={require(fats[1])} alt='Gordura 2' className='icon' />
             </div>
         </div>
     )

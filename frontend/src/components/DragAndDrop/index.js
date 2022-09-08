@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Feedback from '../Feedback'
-import DraggableFood from './DraggableFood'
 import useAnswer from './hooks/useAnswer'
 import useFoodsOnGame from './hooks/useFoodsOnGame'
 import Plate from './Plate'

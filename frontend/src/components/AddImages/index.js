@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { submitImage2Database } from '../../api/submitImage2Database'
 import './styles.scss'
 
 function AddImages() {
 
     const [imageFile, setImageFile] = useState(null)
     const [errorMsg, setErrorMsg] = useState('')
-    const [carbsCheckboxValue, setCarbsCheckboxValue] = useState(false)
-    const [protsCheckboxValue, setProtsCheckboxValue] = useState(false)
-    const [fatsCheckboxValue, setFatsCheckboxValue] = useState(false)
+
+    const formRef = useRef()
 
     const gameMode = useSelector((state) => state.game.gameMode)
     const login = useSelector((state) => state.game.login)
@@ -36,6 +34,7 @@ function AddImages() {
 
     function handleFileChange(e) {
         const fileName = e.target.files['0'].name
+        console.log(e.target.files['0'])
         const fileExtension = fileName.substr(fileName.length - 3)
 
         if (fileExtension !== 'svg') {
@@ -44,20 +43,15 @@ function AddImages() {
         }
 
         setImageFile(e.target.files['0'])
-        console.log(e.target.files)
 
     }
 
-    function handleSubmitBtnClick() {
+    function handleSubmitBtnClick(e) {
         if (imageFile == null) {
             setErrorMsg('Escolha uma imagem para submeter.')
             return
         }
 
-        submitImage2Database(imageFile, carbsCheckboxValue,
-            protsCheckboxValue, fatsCheckboxValue)
-
-        navigate('/images')
     }
 
     return (
@@ -71,51 +65,49 @@ function AddImages() {
                 </Alert>
             }
 
-            <Form id='form'>
-                <div id='checkboxes'>
+            <Form id='form'ref={formRef}
+                action={`${process.env['REACT_APP_BACKEND_URL']}/image`}
+                method='POST' encType='multipart/form-data'>
 
+                <div id='checkboxes'>
                     <Form.Check
                         inline
                         label='Carboidratos'
-                        name='group1'
+                        name='carbs'
                         type='checkbox'
                         id={`inline-checkbox-1`}
-                        value={carbsCheckboxValue}
-                        onClick={() => setCarbsCheckboxValue((state) => !state)}
                     />
                     <Form.Check
                         inline
                         label='Proteínas'
-                        name='group1'
+                        name='prots'
                         type='checkbox'
                         id={`inline-checkbox-2`}
-                        value={protsCheckboxValue}
-                        onClick={() => setProtsCheckboxValue((state) => !state)}
                     />
                     <Form.Check
                         inline
                         label='Gorduras'
-                        name='group1'
+                        name='fats'
                         type='checkbox'
                         id={`inline-checkbox-3`}
-                        value={fatsCheckboxValue}
-                        onClick={() => setFatsCheckboxValue((state) => !state)}
                     />
                 </div>
 
                 <div id='buttons'>
                     <input
-                        className="form-control-file mb-3"
-                        type="file" id="file"
-                        accept=".svg"
+                        className='form-control-file mb-3'
+                        type='file'
+                        id='image'
+                        name='uploaded_image'
+                        accept='.svg'
                         onChange={handleFileChange}
                     />
-                    <Button variant='success' onClick={handleSubmitBtnClick}>
-                        Enviar
-                    </Button>
+
+                    <input className='btn btn-success' type='submit' 
+                    value='Enviar' name='submit' onClick={handleSubmitBtnClick}/>
                 </div>
             </Form >
-        </div>
+        </div >
     )
 }
 

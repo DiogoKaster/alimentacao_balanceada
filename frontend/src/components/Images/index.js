@@ -13,8 +13,6 @@ function Images() {
     const prots = useSelector(state => state.foods.prots)
     const fats = useSelector(state => state.foods.fats)
 
-    const navigate = useNavigate()
-
     return (
         <div id='images'>
             <h1>Imagens</h1>
@@ -25,7 +23,8 @@ function Images() {
 
             <div id='foods'>
                 {
-                    [...carbs, ...prots, ...fats].map((food) => (
+                    Array.from(new Set([...carbs, ...prots, ...fats]))
+                    .map((food) => (
                         <Image imageSrc={food} key={food} />
                     ))
                 }

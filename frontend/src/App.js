@@ -11,7 +11,6 @@ import Introduction from './components/Introduction'
 import useConfigureFoods from './hooks/useConfigureFoods'
 import DragAndDrop from './components/DragAndDrop'
 import './App.scss'
-import Frame14 from './components/Introduction/Frame14'
 
 function App() {
 

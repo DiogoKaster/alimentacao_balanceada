@@ -16,8 +16,8 @@ function Frame6() {
             </ul>
 
             <div>
-                <img src={carbs[0]} alt='Carboidrato 1' className='icon' />
-                <img src={carbs[1]} alt='Carboidrato 2' className='icon' />
+                <img src={require(carbs[0])} alt='Carboidrato 1' className='icon' />
+                <img src={require(carbs[1])} alt='Carboidrato 2' className='icon' />
             </div>
 
         </div>

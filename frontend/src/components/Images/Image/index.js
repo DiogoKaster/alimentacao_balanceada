@@ -37,7 +37,7 @@ function Image({ imageSrc }) {
             }
 
             <img className='icon'
-                src={imageSrc} alt='food' onClick={handleClick} />
+                src={require(imageSrc)} alt='food' onClick={handleClick} />
 
         </div>
     )

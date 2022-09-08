@@ -15,8 +15,8 @@ function Frame11() {
             </ul>
 
             <div>
-                <img src={prots[4]} alt='Proteína 5' className='icon' />
-                <img src={prots[5]} alt='Proteína 6' className='icon' />
+                <img src={require(prots[4])} alt='Proteína 5' className='icon' />
+                <img src={require(prots[5])} alt='Proteína 6' className='icon' />
             </div>
         </div>
     )

@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import game from '../../redux/game'
-import appleIcon from './../../imgs/carbs/apple.svg'
-import bananaIcon from './../../imgs/carbs/banana.svg'
-import cherryIcon from './../../imgs/carbs/cherry.svg'
+import appleIcon from './../../imgs/apple.svg'
+import bananaIcon from './../../imgs/banana.svg'
+import cherryIcon from './../../imgs/cherry.svg'
 
 import './styles.scss'
 
