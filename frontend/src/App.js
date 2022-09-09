@@ -11,25 +11,31 @@ import Introduction from './components/Introduction'
 import useConfigureFoods from './hooks/useConfigureFoods'
 import DragAndDrop from './components/DragAndDrop'
 import './App.scss'
+import Error from './components/Error'
 
 function App() {
 
-  useConfigureFoods()
+  const errorMsg = useConfigureFoods()
 
   return (
     <div className='App'>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/menu' element={<Menu />} />
-        <Route path='/introduction' element={<Introduction />} />
-        <Route path='/quiz' element={<Quiz />} />
-        <Route path='/drag-and-drop' element={<DragAndDrop />} />
-        <Route path='/login' element={<TeacherLogin />} />
-        <Route path='/register' element={<TeacherRegister />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/images' element={<Images />} />
-        <Route path='/add-images' element={<AddImages />} />
-      </Routes>
+      {
+        errorMsg !== null ?
+          <Error msg={errorMsg} />
+          :
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/menu' element={<Menu />} />
+            <Route path='/introduction' element={<Introduction />} />
+            <Route path='/quiz' element={<Quiz />} />
+            <Route path='/drag-and-drop' element={<DragAndDrop />} />
+            <Route path='/login' element={<TeacherLogin />} />
+            <Route path='/register' element={<TeacherRegister />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/images' element={<Images />} />
+            <Route path='/add-images' element={<AddImages />} />
+          </Routes>
+      }
     </div>
   )
 }

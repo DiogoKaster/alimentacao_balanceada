@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import fetchAllImages from '../api/fetchAllImages';
 import { setCarbs, setFats, setProts } from '../redux/foods'
@@ -11,25 +11,35 @@ function useConfigureFoods() {
 
     const dispatch = useDispatch()
 
+    const [errorMsg, setErrorMsg] = useState(null)
+
     useEffect(() => {
         async function fetchData() {
             try {
                 const { carbs, prots, fats } = await fetchAllImages()
 
-                while (carbs.length !== 6)
-                    popRandomElement(carbs)
+                const errorFetchingImages = !carbs || !prots || !fats
+                if (errorFetchingImages)
+                    setErrorMsg('Erro carregando imagens')
+                else if (carbs.length < 6 || prots.length < 6 || fats.length < 4)
+                    setErrorMsg('Adicione mais imagens para poder jogar')
+                else {
 
-                dispatch(setCarbs(carbs))
+                    while (carbs.length !== 6)
+                        popRandomElement(carbs)
 
-                while (prots.length !== 6)
-                    popRandomElement(prots)
+                    dispatch(setCarbs(carbs))
 
-                dispatch(setProts(prots))
+                    while (prots.length !== 6)
+                        popRandomElement(prots)
 
-                while (fats.length !== 4)
-                    popRandomElement(fats)
+                    dispatch(setProts(prots))
 
-                dispatch(setFats(fats))
+                    while (fats.length !== 4)
+                        popRandomElement(fats)
+
+                    dispatch(setFats(fats))
+                }
             } catch (err) {
                 console.log(err)
             }
@@ -39,6 +49,7 @@ function useConfigureFoods() {
 
     }, [])
 
+    return errorMsg
 }
 
 export default useConfigureFoods
