@@ -23,7 +23,7 @@ function TeacherRegister() {
             setShowLoginErrorAlert(true)
         else {
             await registerAccount(emailValue, passwordValue)
-            dispatch(login(emailValue))
+            dispatch(login())
             navigate('/menu')
         }
     }

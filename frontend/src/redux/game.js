@@ -4,8 +4,7 @@ export const gameSlice = createSlice({
     name: 'game',
     initialState: {
         gameMode: 'student',
-        login: true,
-        loginEmail: null
+        loggedIn: window.sessionStorage.getItem('loggedInAlimentacaoBalanceada'),
     },
     reducers: {
         resetGameMode: (state) => {
@@ -17,8 +16,8 @@ export const gameSlice = createSlice({
         },
         login: (state, action) => {
             state.gameMode = 'professor'
-            state.login = true
-            state.loginEmail = action.payload
+            state.loggedIn = true
+            window.sessionStorage.setItem('loggedInAlimentacaoBalanceada', true)
         }
     }
 })

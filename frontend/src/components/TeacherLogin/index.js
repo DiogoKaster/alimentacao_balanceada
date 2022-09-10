@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import checkLoginValidity from '../../api/checkLoginValidity'
 import useForm from '../../hooks/useForm'
@@ -10,17 +10,22 @@ import './styles.scss'
 function TeacherLogin() {
 
     const [showLoginErrorAlert, setShowLoginErrorAlert] = useState()
+    const loggedIn = useSelector(state => state.game.loggedIn)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const [formJsx, emailValue, passwordValue] = useForm('Registrar', 'Login',
-    handleRegisterBtnClick, handleLoginBtnClick)
+        handleRegisterBtnClick, handleLoginBtnClick)
+
+    useEffect(() => {
+        if (loggedIn)
+            navigate('/menu')
+    }, [loggedIn])
 
     async function handleLoginBtnClick() {
         const loggedInSuccessfuly = await checkLoginValidity(emailValue, passwordValue)
         if (loggedInSuccessfuly) {
-            dispatch(login(emailValue))
-            navigate('/menu')
+            dispatch(login())
         }
         else
             setShowLoginErrorAlert(true)
