@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-function usePlayAudio(audioSrc) {
+function usePlayAudio() {
 
-    const audioRef = useRef()
+    const [audioSrc, setAudioSrc] = useState()
 
     useEffect(() => {
-        audioRef.current = new Audio(audioSrc)
-        audioRef.current.play()
+        const audioRef = new Audio(audioSrc)
+        audioRef.play()
     }, [audioSrc])
+
+    return [audioSrc, setAudioSrc]
 
 }
 

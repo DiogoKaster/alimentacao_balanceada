@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Feedback from '../Feedback'
 import { useNavigate } from 'react-router-dom'
-import proteinsAudio from './../../audios/quiz-proteinas.wav'
-import carbsAudio from './../../audios/quiz-carboidratos.wav'
-import fatsAudio from './../../audios/quiz-gorduras.wav'
 import usePlayAudio from '../../hooks/usePlayAudio'
 import './styles.scss'
+import round2AudioMap from './round2AudioMap'
 
 function Quiz() {
 
     const [round, setRound] = useState(0)
     const [quizOptions, setQuizOptions] = useState([])
     const [showFeedback, setShowFeedback] = useState(false)
-    const [answeredCorrectly, setAnsweredCorrectly] = useState()
-    const [curAudioBeingPlayed, setCurAudioBeingPlayed] = useState(proteinsAudio)
+    const [answeredCorrectly, setAnsweredCorrectly] = useState(true)
     const carbs = useSelector((state) => state.foods.carbs)
     const prots = useSelector((state) => state.foods.prots)
     const fats = useSelector((state) => state.foods.fats)
 
     const navigate = useNavigate()
+
+    const [audioSrc, setAudioSrc] = usePlayAudio()
 
     useEffect(() => {
         function includeRandomFoodInQuizOptions(foodArray) {
@@ -44,16 +43,16 @@ function Quiz() {
             setShowFeedback(true)
     }, [round])
 
-    useEffect(() => {
-        if (isItProteinRound())
-            setCurAudioBeingPlayed(proteinsAudio)
-        else if (isItCarbRound())
-            setCurAudioBeingPlayed(carbsAudio)
-        else if (isItFatRound())
-            setCurAudioBeingPlayed(fatsAudio)
-    }, [round])
 
-    usePlayAudio(curAudioBeingPlayed)
+    useEffect(() => {
+        const isItNewQuestion = !showFeedback && answeredCorrectly
+        if (!isItNewQuestion)
+            return
+        
+        setAudioSrc(round2AudioMap[round])
+
+    }, [showFeedback])
+
 
     const isItProteinRound = () => (round === 0 || round === 1)
     const isItCarbRound = () => (round === 2 || round === 3)
@@ -114,6 +113,7 @@ function Quiz() {
                                     <img src={option}
                                         alt={`Opção ${idx + 1}`}
                                         className='icon'
+                                        key={`quiz-option-${idx + 1}`}
                                         onClick={() => handleOptionClick(option)} />
                                 ))
                             }

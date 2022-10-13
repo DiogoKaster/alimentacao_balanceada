@@ -16,7 +16,8 @@ const store = configureStore({
     'game': game,
     'foods': foods,
     'animation': animation,
-    'answer': answer
+    'answer': answer,
+    
   }
 })
 
