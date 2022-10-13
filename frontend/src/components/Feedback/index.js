@@ -7,7 +7,7 @@ function Feedback({ variant, callback }) {
     return (
         <article id='feedback'>
             <h1>
-                {variant === 'positive' && 'Muito bem !'}
+                {variant === 'positive' && 'Muito bem! Você acertou! Vamos continuar! Pressione o botão Próximo'}
                 {variant === 'negative' && 'Não foi dessa vez....Tente novamente !'}
                 {variant === 'end' && 'Parabéns ! Você terminou essa fase'}
             </h1>
