@@ -33,3 +33,9 @@ h1 {
     font-size: 10px;
   }
 }
+
+@media (max-height: 640px) {
+  html {
+    font-size: 13px;
+  }
+}

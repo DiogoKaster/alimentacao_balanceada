@@ -10,12 +10,25 @@ import Images from './components/Images'
 import Introduction from './components/Introduction'
 import useConfigureFoods from './hooks/useConfigureFoods'
 import DragAndDrop from './components/DragAndDrop'
+import GoBackToHome from './components/GoBackToHome'
 import './App.scss'
 import Error from './components/Error'
+import useKeyPress from './hooks/useKeyPress'
+import { useEffect, useState } from 'react'
 
 function App() {
 
   const errorMsg = useConfigureFoods()
+  const keyPressed = useKeyPress('Escape')
+  const [showGoBackToHome, setShowBackToHome] = useState(false)
+
+  useEffect(() => {
+    setShowBackToHome(true)
+  }, [keyPressed])
+
+  useEffect(() => {
+    setShowBackToHome(false)
+  }, [])
 
   return (
     <div className='App'>
@@ -36,6 +49,13 @@ function App() {
             <Route path='/add-images' element={<AddImages />} />
           </Routes>
       }
+
+      {
+        showGoBackToHome && (
+          <GoBackToHome hideComponent={() => setShowBackToHome(false)} />
+        )
+      }
+
     </div>
   )
 }
