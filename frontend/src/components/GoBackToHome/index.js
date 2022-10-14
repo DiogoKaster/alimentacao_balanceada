@@ -24,8 +24,8 @@ function GoBackToHome({ hideComponent }) {
         </Card.Body>
 
         <div id='button-container'>
-          <Button variant='primary' onClick={goBackToHome}>Ir para o tela inicial</Button>
-          <Button variant='outline-primary' onClick={hideComponent}>Ficar aqui</Button>
+          <Button variant='success' onClick={goBackToHome}>Ir para o tela inicial</Button>
+          <Button variant='outline-success' onClick={hideComponent}>Ficar aqui</Button>
         </div>
       </Card>
     </section>
