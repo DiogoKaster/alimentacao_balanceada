@@ -8,6 +8,18 @@
 
     img {
         height: 12rem;
+
+        @media screen and (max-height: 580px) {
+            height: 10rem;
+        }
+
+        @media screen and (max-height: 500px) {
+            height: 8rem;
+        }
+
+        @media screen and (max-height: 400px) {
+            height: 6rem;
+        }
     }
 
     main {

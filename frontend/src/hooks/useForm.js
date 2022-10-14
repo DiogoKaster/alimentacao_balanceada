@@ -5,6 +5,7 @@ const formStyle = {
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'column',
+    flexWrap: 'nowrap',
     justifyContent: 'space-between',
 
     margin: '15vh auto 0 auto',
