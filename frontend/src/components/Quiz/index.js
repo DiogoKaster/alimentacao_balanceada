@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Feedback from '../Feedback'
 import { useNavigate } from 'react-router-dom'
@@ -18,23 +18,28 @@ function Quiz() {
 
     const navigate = useNavigate()
 
-    const [audioSrc, setAudioSrc] = usePlayAudio()
+    const setAudioSrc = usePlayAudio()
 
-    useEffect(() => {
-        function includeRandomFoodInQuizOptions(foodArray) {
-            const randomFood = foodArray[Math.floor(Math.random() * foodArray.length)]
-            setQuizOptions((state) => [...state, randomFood])
+    useLayoutEffect(() => {
+        function getRandomFood(options, foodArray) {
+            let randomFood = null
+            do {
+                randomFood = foodArray[Math.floor(Math.random() * foodArray.length)]
+
+            } while (options.includes(randomFood))
+
+            return randomFood
         }
 
         const areFoodArraysNotDefined = carbs.length === 0
         if (areFoodArraysNotDefined)
             return
 
-        setQuizOptions([])
+        const carbFood = getRandomFood([], carbs)
+        const protFood = getRandomFood([carbFood], prots)
+        const fatFood = getRandomFood([carbFood, protFood], fats)
 
-        includeRandomFoodInQuizOptions(carbs)
-        includeRandomFoodInQuizOptions(prots)
-        includeRandomFoodInQuizOptions(fats)
+        setQuizOptions([carbFood, protFood, fatFood])
 
     }, [round, carbs, prots, fats])
 
@@ -48,7 +53,7 @@ function Quiz() {
         const isItNewQuestion = !showFeedback && answeredCorrectly
         if (!isItNewQuestion)
             return
-        
+
         setAudioSrc(round2AudioMap[round])
 
     }, [showFeedback])

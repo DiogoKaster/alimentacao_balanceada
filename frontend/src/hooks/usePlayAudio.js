@@ -9,7 +9,7 @@ function usePlayAudio() {
         audioRef.play()
     }, [audioSrc])
 
-    return [audioSrc, setAudioSrc]
+    return setAudioSrc
 
 }
 
