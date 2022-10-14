@@ -18,7 +18,7 @@ function GoBackToHome({ hideComponent }) {
         <Card.Body>
           <Card.Title>Sair</Card.Title>
           <Card.Text>
-            Tem certeza que deseja voltar ao tela inicial ?
+            Tem certeza que deseja voltar à tela inicial ?
           </Card.Text>
 
         </Card.Body>
