@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AiFillTags, AiOutlinePlus } from 'react-icons/ai';
 import './styles.scss'
 import Image from './Image';
 import { Form } from 'react-bootstrap';
+import useGo2MenuIfNotLoggedInOrIsStudent from '../../hooks/useGo2MenuIfNotLoggedInOrIsStudent';
 
 function Images() {
 
     const carbs = useSelector(state => state.foods.carbs)
     const prots = useSelector(state => state.foods.prots)
     const fats = useSelector(state => state.foods.fats)
+
+    useGo2MenuIfNotLoggedInOrIsStudent()
 
     const [filter, setFilter] = useState({
         carbs: true,

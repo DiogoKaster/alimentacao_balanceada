@@ -3,6 +3,7 @@ import { Alert, Button, Form } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import useConfigureFoods from '../../hooks/useConfigureFoods'
+import useGo2MenuIfNotLoggedInOrIsStudent from '../../hooks/useGo2MenuIfNotLoggedInOrIsStudent'
 import './styles.scss'
 
 function AddImages() {
@@ -12,17 +13,9 @@ function AddImages() {
 
     const formRef = useRef()
 
-    const gameMode = useSelector((state) => state.game.gameMode)
-    const login = useSelector((state) => state.game.login)
-
-    const navigate = useNavigate()
+    useGo2MenuIfNotLoggedInOrIsStudent()
 
     useConfigureFoods()
-
-    useEffect(() => {
-        if (gameMode === 'student' || !login)
-            navigate('/menu')
-    }, [])
 
     useEffect(() => {
         if (errorMsg === '')
