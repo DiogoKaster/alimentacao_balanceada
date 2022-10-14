@@ -54,6 +54,7 @@ function useForm(btn1Txt, btn2Txt, btn1Callback, btn2Callback) {
                         aria-label='Default'
                         aria-describedby='inputGroup-sizing-default'
                         value={passwordValue}
+                        type='password'
                         onChange={(e) => setPasswordValue(e.target.value)}
                     />
                 </InputGroup>
