@@ -39,31 +39,30 @@
     margin: 0 auto;
     box-sizing: border-box;
 
-    
+    #game-mode-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      align-self: flex-start;
+
+      width: 16vw;
+    }
+
+    #game-mode-switch {
+      height: 4vh;
+      width: 7vw;
+      margin-top: 0;
+    }
+
     label {
       font-size: 1.3rem;
     }
-    
+
     button {
-        width: 22vw;
+      width: 22vw;
       margin: 7vh auto 0 auto;
       font-size: 1rem;
     }
   }
-}
-
-#game-mode-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  align-self: flex-start;
-
-  width: 16vw;
-}
-
-#game-mode-switch {
-  height: 4vh;
-  width: 7vw;
-  margin-top: 0;
 }
