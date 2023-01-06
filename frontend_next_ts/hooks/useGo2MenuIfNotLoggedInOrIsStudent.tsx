@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '../redux/hooks'
 
 function useGo2MenuIfNotLoggedInOrIsStudent() {
-    const gameMode = useSelector((state) => state.game.gameMode)
-    const login = useSelector((state) => state.game.loggedIn)
+    const gameMode = useAppSelector((state) => state.game.gameMode)
+    const login = useAppSelector((state) => state.game.loggedIn)
     const router = useRouter()
 
     useEffect(() => {

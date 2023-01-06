@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-function useSetInterval(fn, time, dependencies) {
+function useSetInterval(fn: Function, time: number, dependencies: React.DependencyList) {
   
     useEffect(() => {
         const interval = setInterval(fn, time)
