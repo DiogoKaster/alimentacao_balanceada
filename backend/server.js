@@ -14,7 +14,7 @@ express_app.use(express.urlencoded({ extended: false }))
 express_app.use(express.json())
 
 express_app.use(express.static(path.join(__dirname, 'build')))
-express_app.use(express.static(path.join(__dirname, 'uploads')))
+express_app.use('/images', express.static(path.join(__dirname, 'uploads')))
 
 express_app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

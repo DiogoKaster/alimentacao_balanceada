@@ -5,11 +5,11 @@ import { callNextAnimationFrame } from '../redux/animation'
 function useAudioInAnimation(audioSrc) {
 
     const dispatch = useDispatch()
-    const audioRef = useRef(new Audio(audioSrc))
+    const audioRef = useRef()
 
 
     useEffect(() => {
-
+        audioRef.current = new Audio('/audios/' + audioSrc + '.wav')
         audioRef.current.play()
         audioRef.current.addEventListener('ended', handleAudioEnding)
 

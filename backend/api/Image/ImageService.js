@@ -25,7 +25,6 @@ class ImageService {
         if (!imageExists)
             throw new Error('Filename doesn\'t exist')
 
-        console.log('123')
         fs.unlinkSync(
             path.join(__dirname, '..', '..', 'uploads', image.filename)
         )

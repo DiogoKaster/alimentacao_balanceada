@@ -4,9 +4,11 @@ import { useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetGameMode, toggleGameMode } from '../redux/game'
+import Frame6 from '../components/Frames/Frame6'
 import styles from '../styles/HomePage.module.scss'
+import useConfigureFoods from '../hooks/useConfigureFoods'
 
-export default function HomePage() {
+export default function HomePage(props) {
   const gameMode = useSelector((state) => state.game.gameMode)
   const dispatch = useDispatch()
 
@@ -17,6 +19,8 @@ export default function HomePage() {
   function handleGameModeSwitchChange() {
     dispatch(toggleGameMode())
   }
+
+  useConfigureFoods()
 
   return (
     <article id={styles.home}>

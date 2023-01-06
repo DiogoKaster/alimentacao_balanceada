@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import fetchAllImages from '../api/fetchAllImages';
+import fetchAllImages from '../utils/fetchAllImages';
 import { setCarbs, setFats, setProts } from '../redux/foods'
 
 function popRandomElement(arr) {
@@ -8,7 +8,6 @@ function popRandomElement(arr) {
 }
 
 function useConfigureFoods() {
-
     const dispatch = useDispatch()
 
     const [errorMsg, setErrorMsg] = useState(null)
@@ -16,7 +15,11 @@ function useConfigureFoods() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const { carbs, prots, fats } = await fetchAllImages()
+                const { carbs, prots, fats } = 
+                    await fetchAllImages(process.env['REACT_APP_BACKEND_URL'])
+
+                console.log('carbs')
+                console.log(carbs)
 
                 const errorFetchingImages = !carbs || !prots || !fats
                 if (errorFetchingImages)
