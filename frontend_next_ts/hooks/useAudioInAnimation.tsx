@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../redux/hooks'
 import { callNextAnimationFrame } from '../redux/states/animation'
 
 function useAudioInAnimation(audioSrc: string): void {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const audioRef = useRef<HTMLAudioElement>()
 
 

@@ -1,28 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import fetchAllImages from '../utils/fetchAllImages';
-import { setCarbs, setFats, setProts } from '../redux/foods'
+import { setCarbs, setFats, setProts } from '../redux/states/foods'
+import { useAppDispatch } from '../redux/hooks';
 
 function popRandomElement(arr: []) {
     arr.splice(Math.floor(Math.random() * arr.length), 1);
 }
 
 function useConfigureFoods() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
+    const [isThereAnError, setIsThereAnError] = useState<boolean>(false)
     const [errorMsg, setErrorMsg] = useState<string>('')
 
+    
     useEffect(() => {
         async function fetchData() {
             try {
-                const { carbs, prots, fats } = 
-                    await fetchAllImages(process.env['REACT_APP_BACKEND_URL'])
+                const foods = await fetchAllImages()
+
+                if (!foods) {
+                    throw new Error('Error fetching images from database')
+                }
+
+                const { carbs, prots, fats } = foods
 
                 const errorFetchingImages = !carbs || !prots || !fats
+                
                 if (errorFetchingImages)
-                    setErrorMsg('Erro carregando imagens')
+                    throw new Error('Error fetching images from database')
                 else if (carbs.length < 6 || prots.length < 6 || fats.length < 4)
-                    setErrorMsg('Adicione mais imagens para poder jogar')
+                    throw new Error('Add more images to play')
                 else {
 
                     while (carbs.length !== 6)
@@ -40,14 +48,16 @@ function useConfigureFoods() {
 
                     dispatch(setFats(fats))
                 }
-            } catch (err) {
+            } catch (err: any) {
+                setErrorMsg(err.message)
+                setIsThereAnError(true)
                 console.log(err)
             }
         }
 
         fetchData()
 
-    }, [])
+    }, [isThereAnError, errorMsg])
 
     return errorMsg
 }

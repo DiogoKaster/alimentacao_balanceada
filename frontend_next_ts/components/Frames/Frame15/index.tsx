@@ -1,15 +1,15 @@
 import React, { } from 'react'
-import { useSelector } from 'react-redux'
 import useChangeFrameAfterInterval from '../../../hooks/useChangeFrameAfterInterval'
 import styles from './Frame15.module.scss'
 import Image from 'next/image'
+import { useAppSelector } from '../../../redux/hooks'
 
 function Frame15() {
 
     useChangeFrameAfterInterval(4)
-    const carbs = useSelector((state) => state.foods.carbs)
-    const prots = useSelector((state) => state.foods.prots)
-    const fats = useSelector((state) => state.foods.fats)
+    const carbs = useAppSelector((state) => state.foods.carbs)
+    const prots = useAppSelector((state) => state.foods.prots)
+    const fats = useAppSelector((state) => state.foods.fats)
 
     return (
         <div id={styles['frame-15']}>
@@ -22,7 +22,7 @@ function Frame15() {
             />
 
             <Image
-                id={styles['plate-img']}
+                id={styles['icon']}
                 src={carbs[1]}
                 alt='Carboidrato'
                 width={500}
@@ -30,7 +30,7 @@ function Frame15() {
                 className={styles.icon}
             />
             <Image
-                id={styles['plate-img']}
+                id={styles['icon']}
                 src={prots[1]}
                 alt='Proteína'
                 width={500}
@@ -38,8 +38,8 @@ function Frame15() {
                 className={styles.icon}
             />
             <Image
-                id={styles['plate-img']}
-                src={fats[1]}
+                id={styles['icon']}
+                src={fats[0]}
                 alt='Gordura'
                 width={500}
                 height={500}

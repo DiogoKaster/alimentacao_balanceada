@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 type FoodsState = {
-    carbs: [],
-    prots: [],
-    fats: []
+    carbs: string[],
+    prots: string[],
+    fats: string[]
 }
 
 const initialState: FoodsState = {

@@ -1,31 +1,31 @@
 import React, { } from 'react'
-import { useSelector } from 'react-redux'
-import useChangeFrameAfterInterval from '../../../hooks/useChangeFrameAfterInterval'
-import styles from './Frame10.module.scss'
+import useAudioInAnimation from '../../../hooks/useAudioInAnimation'
+import styles from './Frame9.module.scss'
 import Image from 'next/image'
+import { useAppSelector } from '../../../redux/hooks'
 
-function Frame10() {
+function Frame9() {
 
-    const prots = useSelector((state) => state.foods.prots)
-    useChangeFrameAfterInterval(4)
+    const prots = useAppSelector((state) => state.foods.prots)
+    useAudioInAnimation('audio-7')
 
     return (
-        <div id={styles['frame-10']}>
+        <div id={styles['frame-9']}>
            <ul>
                 <li>Proteínas.</li>
             </ul>
 
             <div>
                 <Image
-                    src={prots[2]}
-                    alt='Proteína 3'
+                    src={prots[0]}
+                    alt='Proteína 1'
                     width={500}
                     height={500}
                     className={styles.icon}
                 />
                 <Image
-                    src={prots[3]}
-                    alt='Proteína 4'
+                    src={prots[1]}
+                    alt='Proteína 2'
                     width={500}
                     height={500}
                     className={styles.icon}
@@ -35,4 +35,4 @@ function Frame10() {
     )
 }
 
-export default Frame10
+export default Frame9

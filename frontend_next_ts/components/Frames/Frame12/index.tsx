@@ -1,31 +1,32 @@
 import React, { } from 'react'
 import { useSelector } from 'react-redux'
 import useAudioInAnimation from '../../../hooks/useAudioInAnimation'
-import styles from './Frame9.module.scss'
+import styles from './Frame12.module.scss'
 import Image from 'next/image'
+import { useAppSelector } from '../../../redux/hooks'
 
-function Frame9() {
+function Frame12() {
 
-    const prots = useSelector((state) => state.foods.prots)
-    useAudioInAnimation('audio-7')
+    const fats = useAppSelector((state) => state.foods.fats)
+    useAudioInAnimation('audio-8')
 
     return (
-        <div id={styles['frame-9']}>
+        <div id={styles['frame-12']}>
            <ul>
-                <li>Proteínas.</li>
+                <li>Gorduras.</li>
             </ul>
 
             <div>
                 <Image
-                    src={prots[0]}
-                    alt='Proteína 1'
+                    src={fats[0]}
+                    alt='Gordura 1'
                     width={500}
                     height={500}
                     className={styles.icon}
                 />
                 <Image
-                    src={prots[1]}
-                    alt='Proteína 2'
+                    src={fats[1]}
+                    alt='Gordura 2'
                     width={500}
                     height={500}
                     className={styles.icon}
@@ -35,4 +36,4 @@ function Frame9() {
     )
 }
 
-export default Frame9
+export default Frame12

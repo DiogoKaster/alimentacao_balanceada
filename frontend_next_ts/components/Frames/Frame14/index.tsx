@@ -1,15 +1,15 @@
 import React, { } from 'react'
 import useAudioInAnimation from '../../../hooks/useAudioInAnimation'
 import styles from './Frame14.module.scss'
-import { useSelector } from 'react-redux'
 import Image from 'next/image'
+import { useAppSelector } from '../../../redux/hooks'
 
 function Frame14() {
 
     useAudioInAnimation('audio-9')
-    const carbs = useSelector((state) => state.foods.carbs)
-    const prots = useSelector((state) => state.foods.prots)
-    const fats = useSelector((state) => state.foods.fats)
+    const carbs = useAppSelector((state) => state.foods.carbs)
+    const prots = useAppSelector((state) => state.foods.prots)
+    const fats = useAppSelector((state) => state.foods.fats)
 
     return (
         <div id={styles['frame-14']}>
@@ -22,7 +22,7 @@ function Frame14() {
             />
 
             <Image
-                id={styles['plate-img']}
+                id={styles['icon']}
                 src={carbs[0]}
                 alt='Carboidrato'
                 width={500}
@@ -30,7 +30,7 @@ function Frame14() {
                 className={styles.icon}
             />
             <Image
-                id={styles['plate-img']}
+                id={styles['icon']}
                 src={prots[0]}
                 alt='Proteína'
                 width={500}
@@ -38,8 +38,8 @@ function Frame14() {
                 className={styles.icon}
             />
             <Image
-                id={styles['plate-img']}
-                src={fats[0]}
+                id={styles['icon']}
+                src={fats[1]}
                 alt='Gordura'
                 width={500}
                 height={500}

@@ -21,7 +21,7 @@ module.exports = (phase) => {
 
   const env = {
     REACT_APP_BACKEND_URL: (() => {
-      if (isDev) return 'http://localhost:3002'
+      if (isDev) return 'http://localhost:3333'
       // if (isProd) {
       //   return 'https://www.siliconvalley-codecamp.com/rest/speakers/ps'
       // }

@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import React, { } from 'react'
-import { useSelector } from 'react-redux'
 import useChangeFrameAfterInterval from '../../../hooks/useChangeFrameAfterInterval'
+import { useAppSelector } from '../../../redux/hooks'
 import styles from './Frame8.module.scss'
 
 function Frame8() {
 
-    const carbs = useSelector((state) => state.foods.carbs)
+    const carbs = useAppSelector((state) => state.foods.carbs)
     useChangeFrameAfterInterval(4)
 
     return (

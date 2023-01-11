@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import useAudioInAnimation from '../../../hooks/useAudioInAnimation'
+import { useAppSelector } from '../../../redux/hooks'
 import styles from './Frame6.module.scss'
 
 function Frame6() {
 
-    const carbs = useSelector((state) => state.foods.carbs)
+    const carbs = useAppSelector((state) => state.foods.carbs)
     useAudioInAnimation('audio-6')
     
     useEffect(() => {

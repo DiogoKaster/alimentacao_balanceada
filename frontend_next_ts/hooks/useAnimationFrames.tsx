@@ -27,7 +27,7 @@ function useAnimationFrames(animationFrameIdx: number): JSX.Element {
 
     return (
         <>
-            {frames[animationFrameIdx]}
+            {frames[10]}
         </>
     )
 }

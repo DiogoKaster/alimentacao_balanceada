@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 async function performSignUp(email: string, password: string): Promise<boolean> {
-    const url: string = `${process.env['REACT_APP_BACKEND_URL']}/auth/sign-up`
+    const url: string = `${process.env['REACT_APP_BACKEND_URL']}/api/auth/sign-up`
 
     try {
         const { status } = await axios.get(

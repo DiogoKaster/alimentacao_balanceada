@@ -1,31 +1,31 @@
-import React, { } from 'react'
-import { useSelector } from 'react-redux'
-import useChangeFrameAfterInterval from '../../../hooks/useChangeFrameAfterInterval'
-import styles from './Frame11.module.scss'
 import Image from 'next/image'
+import React, { } from 'react'
+import useChangeFrameAfterInterval from '../../../hooks/useChangeFrameAfterInterval'
+import { useAppSelector } from '../../../redux/hooks'
+import styles from './Frame7.module.scss'
 
-function Frame11() {
+function Frame7() {
 
-    const prots = useSelector((state) => state.foods.prots)
+    const carbs = useAppSelector((state) => state.foods.carbs)
     useChangeFrameAfterInterval(4)
 
     return (
-        <div id={styles['frame-11']}>
-           <ul>
-                <li>Proteínas.</li>
+        <div id={styles['frame-7']}>
+            <ul>
+                <li>Carboidratos.</li>
             </ul>
 
             <div>
                 <Image
-                    src={prots[4]}
-                    alt='Proteína 5'
+                    src={carbs[2]}
+                    alt='Carboidrato 3'
                     width={500}
                     height={500}
                     className={styles.icon}
                 />
                 <Image
-                    src={prots[5]}
-                    alt='Proteína 6'
+                    src={carbs[3]}
+                    alt='Carboidrato 4'
                     width={500}
                     height={500}
                     className={styles.icon}
@@ -35,4 +35,4 @@ function Frame11() {
     )
 }
 
-export default Frame11
+export default Frame7

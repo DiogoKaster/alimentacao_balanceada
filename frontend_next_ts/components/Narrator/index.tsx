@@ -5,12 +5,12 @@ import Image from 'next/image'
 
 function Narrator() {
 
-    const frameSrcs = [
+    const frameSrcs: string[] = [
         '/imgs/pear-frame-1.svg',
         '/imgs/pear-frame-2.svg',
         '/imgs/pear-frame-3.svg'
     ]
-    const [frameIdx, setFrameIdx] = useState(0)
+    const [frameIdx, setFrameIdx] = useState<number>(0)
 
     const changeAnimationFrame = () => {
         switch (frameIdx) {

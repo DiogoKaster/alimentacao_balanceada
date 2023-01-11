@@ -8,7 +8,7 @@ async function deleteImageFromDatabase(img: Image) {
         
     const addressLength = process.env['REACT_APP_BACKEND_URL'].length + 1
     const imgFileCorrected = img.filename.substring(addressLength)
-    const url = `${process.env['REACT_APP_BACKEND_URL']}/image`
+    const url = `${process.env['REACT_APP_BACKEND_URL']}/api/image`
 
     try {
         const res = await axios.delete(
