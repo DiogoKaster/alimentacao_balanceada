@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styles from './../../styles/Introduction.module.scss'
+import styles from './../../styles/IntroductionPage.module.scss'
 import Image from 'next/image'
 import useAnimationFrames from '../../hooks/useAnimationFrames'
 import Narrator from '../../components/Narrator'

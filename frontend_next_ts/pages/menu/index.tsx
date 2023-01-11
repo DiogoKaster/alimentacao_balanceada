@@ -12,7 +12,7 @@ function MenuPage() {
     <article id={styles.menu}>
       <header>
         <Image
-          src="/imgs/cherry.svg"
+          src='/imgs/cherry.svg'
           alt='Cherry'
           width={500}
           height={500}
@@ -40,7 +40,7 @@ function MenuPage() {
         </div>
 
         <Image
-          src="/imgs/apple.svg"
+          src='/imgs/apple.svg'
           alt='Apple'
           width={500}
           height={500}
@@ -52,7 +52,7 @@ function MenuPage() {
 
       <footer>
         <Image
-          src="/imgs/banana.svg"
+          src='/imgs/banana.svg'
           alt='Banana'
           width={500}
           height={500}
