@@ -13,21 +13,24 @@ function LoginPage() {
     const router = useRouter()
     const dispatch = useAppDispatch()
 
-    const handleLoginBtnClick: ButtonClickCallback 
+    const handleLoginBtnClick: ButtonClickCallback
         = async (emailState, passwordState) => {
-        const loggedInSuccessfuly = 
-            await performLogin(emailState.getter, passwordState.getter)
-        if (loggedInSuccessfuly) {
-            dispatch(login())
-        }
-        else
-            setShowLoginErrorAlert(true)
-    }
 
-    const handleRegisterBtnClick: ButtonClickCallback 
+            const loggedInSuccessfuly =
+                await performLogin(emailState.getter, passwordState.getter)
+
+            if (loggedInSuccessfuly) {
+                dispatch(login())
+                router.replace('/menu')
+            }
+            else
+                setShowLoginErrorAlert(true)
+        }
+
+    const handleRegisterBtnClick: ButtonClickCallback
         = (emailState, passwordState) => {
-        router.replace('/sign-up')
-    }
+            router.replace('/sign-up')
+        }
 
     return (
         <article id={styles['login']}>

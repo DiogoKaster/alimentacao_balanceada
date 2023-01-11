@@ -42,7 +42,7 @@ function SignUpPage() {
             {
                 showLoginErrorAlert &&
                 <Alert variant='danger'>
-                    Erro no login: e-mail já existente
+                    Erro registrando conta
                 </Alert>
             }
 
