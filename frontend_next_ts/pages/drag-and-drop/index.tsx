@@ -26,7 +26,6 @@ function DragAndDropPage() {
 
   const [round, setRound] = useState<number>(0)
   const [showFeedback, setShowFeedback] = useState(false)
-  const [curAudioBeingPlayed, setCurAudioBeingPlayed] = useState<string>(audio1)
 
   const setUpAnswer =
     useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound)
@@ -39,7 +38,7 @@ function DragAndDropPage() {
   const router = useRouter()
 
 
-  usePlayAudio(curAudioBeingPlayed)
+  const setCurAudioBeingPlayed = usePlayAudio()
 
   useEffect(() => {
     setUpFoodsState()
