@@ -7,7 +7,7 @@ export interface ButtonClickCallback {
     (emailState: StateGetterAndSetter, passwordState: StateGetterAndSetter): void
 }
 
-interface FormProps {
+type FormProps = {
     btnTexts: [string, string],
     callbacks: [ButtonClickCallback, ButtonClickCallback],
 }

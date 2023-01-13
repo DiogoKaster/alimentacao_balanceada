@@ -1,0 +1,25 @@
+#drag-and-drop-plate-img {
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 50%;
+  left: 50%;
+  margin-left: -25%;
+}
+
+.plate-foods {
+  position: absolute;
+  height: 15%;
+}
+
+#plate-food-1 {
+  top: 30%;
+  left: 40%;
+  width: auto;
+}
+
+#plate-food-2 {
+  top: 50%;
+  left: 45%;
+  width: auto;
+}

@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-
-type Answer = {
-    carbs: number
-    prots: number
-    fats: number
-}
+import Answer from '../../types/Answer'
 
 type AnswerState = {
     initialAnswer: Answer,
