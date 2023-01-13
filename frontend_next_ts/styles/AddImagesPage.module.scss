@@ -1,0 +1,40 @@
+#add-images {
+  h1 {
+    text-align: center;
+  }
+
+  #form {
+    height: 20vh;
+    width: 80%;
+    margin: 15vh auto 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    #error-alert {
+      margin: 5vh auto 0 auto;
+      text-align: center;
+      width: 75%;
+    }
+
+    #checkboxes {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      font-size: 1.4rem;
+      height: 100%;
+    }
+
+    #buttons {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      input:nth-child(2) {
+        width: 100%;
+      }
+    }
+  }
+}

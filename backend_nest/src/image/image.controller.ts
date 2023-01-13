@@ -44,7 +44,7 @@ export class ImageController {
     return await this.imageService.findOne(filename);
   }
 
-  @Delete(':id')
+  @Delete(':filename')
   async remove(@Param('filename') filename: string) {
     return await this.imageService.remove(filename);
   }

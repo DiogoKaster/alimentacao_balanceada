@@ -1,0 +1,25 @@
+.image {
+    display: inline-block;
+    margin-left: 0.8vw;
+    width: 9vw;
+    cursor: pointer;
+    position: relative;
+
+    .menu {
+        position: absolute;
+        left: 4vw;
+        width: 5vw;
+        text-align: center;
+        color: #101935;
+        border: 1px solid #101935;
+        background-color: rgb(230, 245, 218);
+    }
+
+    img {
+        height: auto;
+        max-height: 4vw;
+        width: 4vw;
+        margin-bottom: 3vh;
+    }
+
+}

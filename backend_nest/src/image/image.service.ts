@@ -11,7 +11,12 @@ export class ImageService {
 
   async create(dto: ImageDto) {
     const image = await this.prisma.image.create({
-      data: { ...dto }
+      data: {
+        is_it_carbs: dto.is_it_carbs === 'true',
+        is_it_prots: dto.is_it_prots === 'true',
+        is_it_fats: dto.is_it_fats === 'true',
+        filename: dto.filename
+      }
     })
 
     return image

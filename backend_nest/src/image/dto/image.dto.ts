@@ -6,13 +6,13 @@ export class ImageDto {
 
     @IsString()
     @IsNotEmpty()
-    is_it_carbs: boolean
+    is_it_carbs: string
 
     @IsString()
     @IsNotEmpty()
-    is_it_prots: boolean
+    is_it_prots: string
 
     @IsString()
     @IsNotEmpty()
-    is_it_fats: boolean
+    is_it_fats: string
 }

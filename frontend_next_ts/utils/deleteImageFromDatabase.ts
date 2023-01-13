@@ -1,19 +1,16 @@
-import Image from '../types/Image'
-
 const axios = require('axios')
 
-async function deleteImageFromDatabase(img: Image) {
+async function deleteImageFromDatabase(imageSrc: string) {
     if (!process.env['REACT_APP_BACKEND_URL'])
         return
         
-    const addressLength = process.env['REACT_APP_BACKEND_URL'].length + 1
-    const imgFileCorrected = img.filename.substring(addressLength)
-    const url = `${process.env['REACT_APP_BACKEND_URL']}/api/image`
+    const addressLength = process.env['REACT_APP_BACKEND_URL'].length + '/images'.length + 1
+    const imgFileCorrected = imageSrc.substring(addressLength)
+    const url = `${process.env['REACT_APP_BACKEND_URL']}/api/image/${imgFileCorrected}`
 
     try {
         const res = await axios.delete(
-            url, 
-            { params: { filename: imgFileCorrected }}
+            url,
         )
     } catch (err) {
         console.log(err)
