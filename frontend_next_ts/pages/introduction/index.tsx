@@ -22,13 +22,6 @@ function IntroductionPage() {
   return (
     <article id={styles['introduction']}>
       <header>
-        <Image
-          src='/imgs/cherry.svg'
-          alt='Cherry'
-          width={500}
-          height={500}
-          className={`icon ${styles.icon}`}
-        />
         <h1>Introdução</h1>
       </header>
 
@@ -39,13 +32,6 @@ function IntroductionPage() {
       {displayNarrator && <Narrator />}
 
       <footer>
-        <Image
-          src='/imgs/banana.svg'
-          alt='Banana'
-          width={500}
-          height={500}
-          className={`icon ${styles.icon}`}
-        />
       </footer>
     </article>
   )

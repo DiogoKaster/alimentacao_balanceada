@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useGo2MenuIfNotLoggedInOrIsStudent from '../../hooks/useGo2MenuIfNotLoggedInOrIsStudent'
 import { Alert, Form } from 'react-bootstrap'
-import styles from './../../styles/AddImagesPage.module.scss'
 import { useRouter } from 'next/router'
 import saveImageInDatabase from '../../utils/saveImageInDatabase'
+import styles from './../../styles/AddImagesPage.module.scss'
 
 function AddImagesPage() {
     const [imageFile, setImageFile] = useState<File>()

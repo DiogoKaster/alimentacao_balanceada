@@ -1,13 +1,15 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import styles from './Feedback.module.scss'
+import { Rating } from 'react-simple-star-rating'
 
 type FeedbackProps = {
     variant: string,
-    callback: React.MouseEventHandler<HTMLButtonElement>
+    callback: React.MouseEventHandler<HTMLButtonElement>,
+    numStars?: number
 }
 
-function Feedback({ variant, callback }: FeedbackProps) {
+function Feedback({ variant, callback, numStars=0 }: FeedbackProps) {
 
     return (
         <article id={styles['feedback']}>
@@ -16,6 +18,12 @@ function Feedback({ variant, callback }: FeedbackProps) {
                 {variant === 'negative' && 'Não foi dessa vez....Tente novamente !'}
                 {variant === 'end' && 'Parabéns ! Você terminou essa fase'}
             </h1>
+
+            {
+                numStars > 0 && (
+                    <Rating initialValue={numStars} />
+                )
+            }
 
             <Button variant='success' onClick={callback}>
                 {variant === 'positive' && 'Próximo'}
