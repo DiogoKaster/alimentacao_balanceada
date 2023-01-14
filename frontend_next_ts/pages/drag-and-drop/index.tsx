@@ -93,7 +93,7 @@ function DragAndDropPage() {
       {
         showFeedback ?
           <Feedback variant={isDragAndDropOver() ? 'end' : 'positive'}
-            callback={handleFeedbackButtonClick} />
+            callback={handleFeedbackButtonClick} numStars={round}/>
           :
           <div id={styles['drag-and-drop']}>
             <h1>Arraste-e-solte</h1>

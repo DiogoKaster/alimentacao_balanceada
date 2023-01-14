@@ -20,8 +20,10 @@ function Feedback({ variant, callback, numStars=0 }: FeedbackProps) {
             </h1>
 
             {
-                numStars > 0 && (
-                    <Rating initialValue={numStars} />
+                (numStars > 0 && variant !== 'negative') &&  (
+                    <Rating 
+                        initialValue={variant === 'end' ? 5 : numStars} 
+                        readonly size={80} />
                 )
             }
 

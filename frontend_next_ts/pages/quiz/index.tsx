@@ -100,6 +100,7 @@ function QuizPage() {
           <Feedback
             variant={getFeedbackVariant()}
             callback={handleFeedbackBtnClick}
+            numStars={round + 1}
           /> :
 
           <article id={styles['quiz']}>
