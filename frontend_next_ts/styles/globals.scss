@@ -27,6 +27,12 @@ h1 {
   }
 }
 
+@media (max-width: 1100px) {
+  :root {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 800px) {
   :root {
     font-size: 10px;
@@ -35,19 +41,31 @@ h1 {
 
 @media (max-height: 640px) {
   :root {
-    font-size: 13px;
+    font-size: 9px;
   }
 }
 
 @media (max-height: 540px) {
   :root {
-    font-size: 11px;
+    font-size: 8px;
   }
 }
 
 @media (max-height: 440px) {
   :root {
-    font-size: 9px;
+    font-size: 7px;
+  }
+}
+
+@media (max-height: 360px) {
+  :root {
+    font-size: 6px;
+  }
+}
+
+@media (max-height: 280px) {
+  :root {
+    font-size: 5px;
   }
 }
 
