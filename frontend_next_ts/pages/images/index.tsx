@@ -4,7 +4,7 @@ import useGo2MenuIfNotLoggedInOrIsStudent from '../../hooks/useGo2MenuIfNotLogge
 import { Form } from 'react-bootstrap'
 import Link from 'next/link'
 import Image from '../../components/Image'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlusSquare } from 'react-icons/ai'
 import styles from './../../styles/ImagesPage.module.scss'
 import useConfigureFoods from '../../hooks/useConfigureFoods'
 
@@ -88,7 +88,7 @@ function ImagesPage() {
                 </div>
 
                 <Link href='/add-images'>
-                    <AiOutlinePlus className={styles['icon']} />
+                    <AiOutlinePlusSquare className={styles['icon']}/>
                 </Link>
             </div>
 
