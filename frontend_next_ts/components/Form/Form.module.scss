@@ -5,16 +5,43 @@
   justify-content: space-between;
 
   margin: 15vh auto 0 auto;
-  height: 28%;
   width: 45%;
+  
+  @media screen and (max-width: 640px) {
+    height: 23%;
+    width: auto;
+  }
 
+  input {
+    @media screen and (max-width: 640px) {
+      width: 55vw;  
+      height: 4.5vh;  
+    }
+  }
+
+  span {
+    @media screen and (max-width: 640px) {
+      height: 4.5vh;  
+    }
+  }
+
+  
   #button-container {
     display: flex;
     justify-content: space-between;
+    
+    @media screen and (max-width: 1243px) {
+      margin-top: 3vh;
+    }
 
     button {
       width: 13vw;
       margin: 0;
+      
+      @media screen and (max-width: 400px) {
+        width: 25vw;  
+        height: 4.5vh;   
+      }
     }
   }
 }

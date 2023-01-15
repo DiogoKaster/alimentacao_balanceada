@@ -22,7 +22,7 @@ function MenuPage() {
       </header>
 
       <main
-        style={{ height: gameMode === 'student' ? '42%' : '35%' }}>
+        className={styles[ `main-height-${gameMode}`]}>
 
         <div id={styles.buttons}>
           <Link href='/introduction'><button>Introdução</button></Link>

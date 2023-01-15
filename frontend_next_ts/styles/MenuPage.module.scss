@@ -10,6 +10,10 @@
     height: 25%;
     width: 100%;
     text-align: center;
+    
+    @media screen and (max-width: 400px) {
+      height: 20%;
+    }
 
     .icon {
       grid-row: row;
@@ -22,10 +26,24 @@
       grid-column: h1;
       font-size: 5rem;
 
-      @media screen and (max-height: 500px) {
+      @media screen and (max-width: 400px) {
         font-size: 4rem;
       }
     }
+  }
+
+  .main-height-student {
+    height: 42%;
+
+    @media screen and (max-width: 400px) {
+      margin-top: 12%;
+      height: 35%;
+    }
+    
+  }
+
+  .main-height-professor {
+    height: 35%;
   }
 
   main {
@@ -35,7 +53,6 @@
       [col1-start] 30% [col1-end buttons-start] 40%
       [buttons-end col2-start] 30% [col2-end];
     align-items: center;
-    // height: 42%;
     margin-top: 5%;
 
     #buttons {
@@ -58,17 +75,22 @@
         border: 2px solid #101935;
         background-color: transparent;
         border-radius: 0.375rem;
+        
+        @media screen and (max-width: 500px) {
+          width: 60vw;
+          height: 7.5vw;
+        }
 
         &:hover {
           background-color: #9bc972;
         }
 
-        @media screen and (max-height: 560px) {
-          font-size: 2vw;
+        @media screen and (max-width: 400px) {
+          font-size: 4.5vw;
         }
 
-        @media screen and (max-height: 420px) {
-          font-size: 1.5vw;
+        @media screen and (max-width: 420px) {
+          // font-size: 1.5vw;
         }
       }
     }
@@ -76,6 +98,10 @@
     .icon {
       grid-row: row;
       grid-column: col2;
+
+      @media screen and (max-height: 1000px) {
+        justify-self: end;
+      }
     }
   }
 
@@ -86,6 +112,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-height: 600px) {
+      height: 10%;
+      align-items: flex-end;
+    }
   }
 
   img {
