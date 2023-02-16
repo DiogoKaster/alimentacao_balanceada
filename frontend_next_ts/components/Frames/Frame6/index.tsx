@@ -9,10 +9,6 @@ function Frame6() {
     const carbs = useAppSelector((state) => state.foods.carbs)
     useAudioInAnimation('audio-6')
     
-    useEffect(() => {
-        console.log(carbs)
-    }, [carbs])
-
     return (
         <div id={styles['frame-6']}>
             <ul>

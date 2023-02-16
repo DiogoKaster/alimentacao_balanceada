@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import styles from './Feedback.module.scss'
 import { Rating } from 'react-simple-star-rating'
+import usePlayAudio from '../../hooks/usePlayAudio'
 
 type FeedbackProps = {
-    variant: string,
+    variant: 'positive' | 'negative' | 'end',
     callback: React.MouseEventHandler<HTMLButtonElement>,
     numStars?: number
 }
 
-function Feedback({ variant, callback, numStars=0 }: FeedbackProps) {
+function Feedback({ variant, callback, numStars = 0 }: FeedbackProps) {
+
+    const setCurAudioBeingPlayed = usePlayAudio()
+
+    useEffect(() => {
+        setCurAudioBeingPlayed(state => (
+            `/audios/${variant}-feedback.aac`
+        )
+    )}, [])
 
     return (
         <article id={styles['feedback']}>
@@ -20,9 +29,9 @@ function Feedback({ variant, callback, numStars=0 }: FeedbackProps) {
             </h1>
 
             {
-                (numStars > 0 && variant !== 'negative') &&  (
-                    <Rating 
-                        initialValue={variant === 'end' ? 5 : numStars} 
+                (numStars > 0 && variant !== 'negative') && (
+                    <Rating
+                        initialValue={variant === 'end' ? 5 : numStars}
                         readonly size={80} />
                 )
             }

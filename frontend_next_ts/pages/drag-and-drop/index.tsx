@@ -20,9 +20,9 @@ import styles from './../../styles/DragAndDropPage.module.scss'
 
 function DragAndDropPage() {
 
-  const audio1 = './../../audios/d&d-1.wav'
-  const audio2 = './../../audios/d&d-2.wav'
-  const audio3 = './../../audios/d&d-3.wav'
+  const audio1 = '/audios/d&d-1.aac'
+  const audio2 = '/audios/d&d-2.aac'
+  const audio3 = '/audios/d&d-3.aac'
 
   const [round, setRound] = useState<number>(0)
   const [showFeedback, setShowFeedback] = useState(false)

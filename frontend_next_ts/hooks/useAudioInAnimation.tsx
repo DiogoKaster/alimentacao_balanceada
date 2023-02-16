@@ -9,7 +9,7 @@ function useAudioInAnimation(audioSrc: string): void {
 
 
     useEffect(() => {
-        audioRef.current = new Audio('/audios/' + audioSrc + '.wav')
+        audioRef.current = new Audio('/audios/' + audioSrc + '.aac')
         audioRef.current.play()
         audioRef.current.addEventListener('ended', handleAudioEnding)
 

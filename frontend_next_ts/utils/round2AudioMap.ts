@@ -1,9 +1,9 @@
 const round2AudioMap = [
-    '/audios/quiz-proteinas-1.wav',
-    '/audios/quiz-proteinas-2.wav',
-    '/audios/quiz-carboidratos-1.wav',
-    '/audios/quiz-carboidratos-2.wav',
-    '/audios/quiz-gorduras-1.wav',
+    '/audios/quiz-proteinas-1.aac',
+    '/audios/quiz-proteinas-2.aac',
+    '/audios/quiz-carboidratos-1.aac',
+    '/audios/quiz-carboidratos-2.aac',
+    '/audios/quiz-gorduras-1.aac',
 ]
 
 export default round2AudioMap
