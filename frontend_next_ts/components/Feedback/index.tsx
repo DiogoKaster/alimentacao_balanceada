@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import styles from './Feedback.module.scss'
 import { Rating } from 'react-simple-star-rating'
 import usePlayAudio from '../../hooks/usePlayAudio'
+import useWindowSize from '../../hooks/useWindowSize'
 
 type FeedbackProps = {
     variant: 'positive' | 'negative' | 'end',
@@ -13,12 +14,42 @@ type FeedbackProps = {
 function Feedback({ variant, callback, numStars = 0 }: FeedbackProps) {
 
     const setCurAudioBeingPlayed = usePlayAudio()
+    const [starSize, setStarSize] = useState<40 | 80>(80)
 
     useEffect(() => {
         setCurAudioBeingPlayed(state => (
             `/audios/${variant}-feedback.aac`
         )
-    )}, [])
+        )
+    }, [])
+
+    const windowSize = useWindowSize()
+
+    useLayoutEffect(() => {
+        function getStarsSize() {
+            const defaultSize = 80
+    
+            if (typeof windowSize === 'undefined')
+                return defaultSize
+    
+            if (windowSize.orientation === 'portrait')
+                return 40
+
+            return defaultSize
+        }
+
+        setStarSize(getStarsSize())
+    }, [windowSize])
+
+    function getStarsSize() {
+        const defaultSize = 80
+
+        if (typeof windowSize === 'undefined')
+            return defaultSize
+
+        if (windowSize.orientation === 'portrait')
+            return 40
+    }
 
     return (
         <article id={styles['feedback']}>
@@ -32,7 +63,8 @@ function Feedback({ variant, callback, numStars = 0 }: FeedbackProps) {
                 (numStars > 0 && variant !== 'negative') && (
                     <Rating
                         initialValue={variant === 'end' ? 5 : numStars}
-                        readonly size={80} />
+                        readonly size={starSize}
+                    />
                 )
             }
 

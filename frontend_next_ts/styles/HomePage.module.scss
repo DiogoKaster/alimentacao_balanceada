@@ -1,9 +1,20 @@
 #home {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 20vh;
+  @media screen and (orientation: portrait) and (max-width: 550px) {
+    justify-content: space-between;
+    row-gap: 0vh;
+  }
+
   header {
-    height: 30%;
+    height: 20%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    box-sizing: border-box;
 
     h1 {
       text-align: center;
@@ -12,37 +23,38 @@
       @media screen and (max-height: 580px) {
         font-size: 3rem;
       }
-      @media screen and (max-width: 600px) {
-        font-size: 2.7rem;
+      @media screen and (max-width: 550px) and (orientation: portrait) {
+        font-size: 4.3rem;
+        padding: 0 4vw;
+      }
+
+      @media screen and (min-width: 600px) and (orientation: portrait) {
+        font-size: 5rem;
+        padding: 0 4vw;
+      }
+    }
+
+    img {
+      @media screen and (orientation: portrait) {
+        display: none;
       }
     }
   }
 
   img {
-    height: 12rem;
+    height: 8rem;
     width: auto;
 
     @media screen and (max-height: 580px) {
       height: 10rem;
     }
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 550px) and (orientation: portrait) {
       height: 10rem;
     }
 
-    @media screen and (max-height: 500px) {
-      height: 8rem;
-    }
-
-    @media screen and (max-width: 600px) {
-      height: 8rem;
-    }
-
-    @media screen and (max-height: 400px) {
-      height: 6rem;
-    }
-    @media screen and (max-width: 400px) {
-      height: 6rem;
+    @media screen and (min-width: 600px) and (orientation: portrait) {
+      height: 15rem;
     }
   }
 
@@ -51,15 +63,10 @@
     flex-direction: column;
     align-items: center;
 
-    padding: 10%;
-    height: 60%;
+    height: fit-content;
     width: 70%;
     margin: 0 auto;
     box-sizing: border-box;
-
-    @media screen and (max-width: 400px) {
-      margin-top: 10vh;
-    }
 
     #game-mode-form {
       display: flex;
@@ -69,6 +76,10 @@
       align-self: flex-start;
 
       width: 16vw;
+
+      @media screen and (orientation: portrait) {
+        display: none;
+      }
 
       @media screen and (max-width: 800px) {
         width: 100%;
@@ -88,13 +99,17 @@
       @media screen and (max-width: 800px) {
         width: 10vw;
       }
-      @media screen and (max-width: 500px) {
-        width: 25vw;
+      @media screen and (max-width: 550px) and (orientation: portrait) {
+        width: 20vw;
       }
     }
 
     label {
       font-size: 1.3rem;
+
+      @media screen and (max-width: 550px) and (orientation: portrait) {
+        font-size: 1.5rem;
+      }
     }
 
     button {
@@ -102,9 +117,30 @@
       margin: 7vh auto 0 auto;
       font-size: 1.3rem;
 
-      @media screen and (max-width: 500px) {
+      @media screen and (max-width: 550px) and (orientation: portrait) {
         width: 62vw;
+        height: 6vh;
+        font-size: 2rem;
       }
+
+      @media screen and (min-width: 600px) and (orientation: portrait) {
+        width: 62vw;
+        height: 6vh;
+        font-size: 3rem;
+      }
+    }
+  }
+
+  footer {
+    height: 20%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 4vh;
+
+    @media screen and (orientation: landscape) {
+      display: none;
     }
   }
 }

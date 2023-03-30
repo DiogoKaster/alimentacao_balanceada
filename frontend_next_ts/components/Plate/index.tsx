@@ -31,8 +31,8 @@ function Plate({ nOfMissingFood, elementClass }: PlateProps) {
             <Image
                 id={styles['drag-and-drop-plate-img']}
                 className={elementClass} src='/imgs/plate-cropped.svg' alt='Prato'
-                width={500}
-                height={500}
+                width={10}
+                height={10}
             />
 
             {
@@ -41,8 +41,8 @@ function Plate({ nOfMissingFood, elementClass }: PlateProps) {
                         id={styles[`plate-food-${idx + 1}`]}
                         src={food} className={styles['plate-foods']}
                         alt='Comida'
-                        width={500}
-                        height={500}
+                        width={1}
+                        height={1}
                     />
                 ))
             }

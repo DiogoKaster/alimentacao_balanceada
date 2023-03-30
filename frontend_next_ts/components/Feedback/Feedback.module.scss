@@ -6,6 +6,10 @@
   height: 100%;
   width: 100%;
 
+  @media screen and (orientation: portrait) {
+    justify-content: space-around;
+  }
+
   h1 {
     text-align: center;
     font-size: 4rem;
@@ -13,6 +17,12 @@
 
     @media screen and (max-height: 600px) {
       font-size: 3rem;
+    }
+
+    @media screen and (orientation: portrait) {
+      margin: 0;
+      padding: 0 3vw;
+      text-align: center;
     }
   }
 
@@ -22,6 +32,11 @@
 
     @media screen and (max-height: 600px) {
       font-size: 1.5rem;
+    }
+
+    @media screen and (orientation: portrait) {
+      font-size: 2rem;
+      width: 50vw;
     }
   }
 }

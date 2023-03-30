@@ -5,6 +5,7 @@ import styles from './../../styles/QuizPage.module.scss'
 import usePlayAudio from '../../hooks/usePlayAudio'
 import round2AudioMap from '../../utils/round2AudioMap'
 import Feedback from '../../components/Feedback'
+import Image from 'next/image'
 
 function QuizPage() {
   const [round, setRound] = useState<number>(0)
@@ -115,11 +116,15 @@ function QuizPage() {
             <div id={styles['quiz-options']}>
               {
                 quizOptions.map((option, idx) => (
-                  <img src={option}
+                  <Image
+                    src={option}
                     alt={`Opção ${idx + 1}`}
                     className={styles['icon']}
+                    width={1}
+                    height={1}
                     key={`quiz-option-${idx + 1}`}
-                    onClick={() => handleOptionClick(option)} />
+                    onClick={() => handleOptionClick(option)}
+                  />
                 ))
               }
             </div>

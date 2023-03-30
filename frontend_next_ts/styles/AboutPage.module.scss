@@ -1,39 +1,93 @@
 #about {
-    header {
-        height: 30%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  @media screen and (orientation: portrait) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  @media screen and (orientation: portrait) and (min-width: 700px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 5vh;
+  }
+
+  header {
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    @media screen and (orientation: portrait) {
+      justify-content: center;
+      height: auto;
     }
+    img {
+      height: 12rem;
+      max-width: 12rem;
+
+      @media screen and (orientation: portrait) {
+        display: none;
+      }
+
+      // @media screen and (max-height: 580px) {
+      //     height: 10rem;
+      // }
+
+      // @media screen and (max-height: 500px) {
+      //     height: 8rem;
+      // }
+
+      // @media screen and (max-height: 400px) {
+      //     height: 6rem;
+      // }
+    }
+  }
+
+  main {
+    margin-top: 4vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2vw;
+
+    p {
+      font-size: 2rem;
+      
+      @media screen and (orientation: portrait) and (max-width: 420px) {
+          font-size: 1.8rem;
+      }
+      @media screen and (orientation: portrait) and (max-width: 360px) {
+        font-size: 1.7rem;
+    }
+    }
+  }
+
+  footer {
+    height: 20%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 4vh;
 
     img {
+      height: 8rem;
+      max-width: 8rem;
+   
+      @media screen and (orientation: portrait) and (min-width: 700px) {
         height: 12rem;
         max-width: 12rem;
-
-        // @media screen and (max-height: 580px) {
-        //     height: 10rem;
-        // }
-
-        // @media screen and (max-height: 500px) {
-        //     height: 8rem;
-        // }
-
-        // @media screen and (max-height: 400px) {
-        //     height: 6rem;
-        // }
+      }
     }
 
-    main {
-
-        margin-top: 4vh;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        p {
-            font-size: 2rem;
-        }
+    @media screen and (orientation: landscape) {
+      display: none;
     }
+
+  }
 }

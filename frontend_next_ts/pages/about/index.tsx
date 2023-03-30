@@ -31,6 +31,21 @@ function AboutPage() {
                 <p>GitHub: https://github.com/CacaAlves00</p>
             </main>
 
+            <footer>
+                <Image
+                    src="/imgs/dse.png"
+                    alt='Desenvolvimento de Software Educacional'
+                    width={500}
+                    height={500}
+                />
+                <Image
+                    src="/imgs/lesic.png"
+                    alt='LESIC'
+                    width={500}
+                    height={500}
+                />
+            </footer>
+
         </article>
     )
 }

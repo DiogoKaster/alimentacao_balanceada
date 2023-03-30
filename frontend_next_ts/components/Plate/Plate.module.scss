@@ -16,10 +16,18 @@
   top: 30%;
   left: 40%;
   width: auto;
+
+  @media screen and (orientation: portrait) {
+    width: 15vw;
+  }
 }
 
 #plate-food-2 {
   top: 50%;
   left: 45%;
   width: auto;
+
+  @media screen and (orientation: portrait) {
+    width: 15vw;
+  }
 }
