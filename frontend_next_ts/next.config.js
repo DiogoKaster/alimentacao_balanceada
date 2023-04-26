@@ -21,8 +21,8 @@ module.exports = (phase) => {
 
   const env = {
     REACT_APP_BACKEND_URL: (() => {
-      // if (isDev) return 'http://localhost:3333'
-      if (isDev) return 'http://192.168.43.155:3333'
+      if (isDev) return 'http://localhost:3333'
+      // if (isDev) return 'http://192.168.43.155:3333'
       // if (isProd) {
       //   return 'https://www.siliconvalley-codecamp.com/rest/speakers/ps'
       // }
@@ -37,8 +37,8 @@ module.exports = (phase) => {
     remotePatterns: [
       {
         protocol: 'http',
-        // hostname: 'localhost',
-        hostname: '192.168.43.155',
+        hostname: 'localhost',
+        // hostname: '192.168.43.155',
         port: '3333',
         pathname: '/images/**',
       },

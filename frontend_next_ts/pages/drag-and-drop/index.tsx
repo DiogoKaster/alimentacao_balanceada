@@ -6,6 +6,7 @@ import usePlayAudio from '../../hooks/usePlayAudio'
 import Feedback from '../../components/Feedback'
 import Plate from '../../components/Plate'
 import styles from './../../styles/DragAndDropPage.module.scss'
+import useConfigureFoods from '../../hooks/useConfigureFoods'
 
 /*
     If it's missing 1 food, the missing food will be a fat
@@ -32,6 +33,7 @@ function DragAndDropPage() {
 
   const plateClassName = 'plate-reference-from-drag-and-drop-page'
 
+  useConfigureFoods()
 
   const [mapFoodsOnGameToFoods, setUpFoodsState] = useFoodsOnGame()
 
@@ -93,7 +95,7 @@ function DragAndDropPage() {
       {
         showFeedback ?
           <Feedback variant={isDragAndDropOver() ? 'end' : 'positive'}
-            callback={handleFeedbackButtonClick} numStars={round}/>
+            callback={handleFeedbackButtonClick} numStars={round} />
           :
           <div id={styles['drag-and-drop']}>
             <h1>Arraste-e-solte</h1>

@@ -12,19 +12,21 @@ function useFoodsOnGame(): [MappingFoodsOnGame, Function] {
 
     const [foodsOnGame, setFoodsOnGame] = useState<string[]>([])
 
-    const carbs = useAppSelector((state) => state.foods.carbs)
-    const prots = useAppSelector((state) => state.foods.prots)
-    const fats = useAppSelector((state) => state.foods.fats)
+    const foods = useAppSelector((state) => state.foods)
 
     const answer = useAppSelector((state) => state.answer.answer)
     const initialAnswer = useAppSelector((state) => state.answer.initialAnswer)
     const dispatch = useAppDispatch()
 
+    useEffect(() => {
+        setUpFoodsState()
+    }, [foods])
+
     function setUpFoodsState() {
         setFoodsOnGame([
-            carbs[Math.floor(Math.random() * carbs.length)],
-            prots[Math.floor(Math.random() * prots.length)],
-            fats[Math.floor(Math.random() * fats.length)]
+            foods.carbs[Math.floor(Math.random() * foods.carbs.length)],
+            foods.prots[Math.floor(Math.random() * foods.prots.length)],
+            foods.fats[Math.floor(Math.random() * foods.fats.length)]
         ])
     }
 
@@ -37,7 +39,7 @@ function useFoodsOnGame(): [MappingFoodsOnGame, Function] {
             if (isOverlapping) {
                 const isAnsCorrect = initialAnswer[type] === 0
                 const wasItAlreadyInsidePlate = answer[type] === 1
-               
+
                 if (isAnsCorrect) {
                     if (!wasItAlreadyInsidePlate) dispatch(increaseAnswer(type))
                 }
@@ -47,19 +49,19 @@ function useFoodsOnGame(): [MappingFoodsOnGame, Function] {
                 const wasAnsCorrect =
                     answer[type] === 1 && initialAnswer[type] === 0
 
-                    if (wasAnsCorrect)
+                if (wasAnsCorrect)
                     dispatch(decreaseAnswer(type))
             }
 
         }
 
-        const isFoodCarb = carbs.includes(imgSrc)
+        const isFoodCarb = foods.carbs.includes(imgSrc)
         if (isFoodCarb) changeAnswer('carbs')
 
-        const isFoodProt = prots.includes(imgSrc)
+        const isFoodProt = foods.prots.includes(imgSrc)
         if (isFoodProt) changeAnswer('prots')
 
-        const isFoodFat = fats.includes(imgSrc)
+        const isFoodFat = foods.fats.includes(imgSrc)
         if (isFoodFat) changeAnswer('fats')
     }
 

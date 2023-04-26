@@ -6,6 +6,7 @@ import usePlayAudio from '../../hooks/usePlayAudio'
 import round2AudioMap from '../../utils/round2AudioMap'
 import Feedback from '../../components/Feedback'
 import Image from 'next/image'
+import useConfigureFoods from '../../hooks/useConfigureFoods'
 
 function QuizPage() {
   const [round, setRound] = useState<number>(0)
@@ -19,6 +20,8 @@ function QuizPage() {
   const router = useRouter()
 
   const setAudioSrc = usePlayAudio()
+
+  useConfigureFoods()
 
   useLayoutEffect(() => {
     function getRandomFood(options: string[], foodArray: string[]) {

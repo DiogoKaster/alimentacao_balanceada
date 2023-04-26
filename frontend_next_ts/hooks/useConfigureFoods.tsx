@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import fetchAllImages from '../utils/fetchAllImages';
 import { setCarbs, setFats, setProts } from '../redux/states/foods'
-import { useAppDispatch } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 function popRandomElement(arr: []) {
     arr.splice(Math.floor(Math.random() * arr.length), 1);
@@ -12,8 +12,8 @@ function useConfigureFoods() {
 
     const [isThereAnError, setIsThereAnError] = useState<boolean>(false)
     const [errorMsg, setErrorMsg] = useState<string>('')
+    const foods = useAppSelector(state => state.foods)
 
-    
     useEffect(() => {
         async function fetchData() {
             try {
@@ -26,7 +26,7 @@ function useConfigureFoods() {
                 const { carbs, prots, fats } = foods
 
                 const errorFetchingImages = !carbs || !prots || !fats
-                
+
                 if (errorFetchingImages)
                     throw new Error('Error fetching images from database')
                 else if (carbs.length < 6 || prots.length < 6 || fats.length < 4)
@@ -55,7 +55,13 @@ function useConfigureFoods() {
             }
         }
 
-        fetchData()
+        const areFoodsUndefined =
+            foods.carbs.length === 0 ||
+            foods.fats.length === 0 ||
+            foods.prots.length === 0
+
+        if (areFoodsUndefined)
+            fetchData()
 
     }, [isThereAnError, errorMsg])
 

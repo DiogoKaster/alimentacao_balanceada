@@ -9,25 +9,22 @@
 
 .plate-foods {
   position: absolute;
-  height: 15%;
+
+  width: 7vw;
+  height: 7vw;
+
+  @media screen and (orientation: portrait) {
+    width: 10vw;
+    height: 10vw;
+  }
 }
 
 #plate-food-1 {
   top: 30%;
   left: 40%;
-  width: auto;
-
-  @media screen and (orientation: portrait) {
-    width: 15vw;
-  }
 }
 
 #plate-food-2 {
   top: 50%;
   left: 45%;
-  width: auto;
-
-  @media screen and (orientation: portrait) {
-    width: 15vw;
-  }
 }

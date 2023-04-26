@@ -25,6 +25,7 @@ function Form({ btnTexts, callbacks }: FormProps) {
                         E-mail
                     </InputGroup.Text>
                     <FormBootstrap.Control
+                        type='text'
                         aria-label='Default'
                         aria-describedby='inputGroup-sizing-default'
                         value={emailValue}

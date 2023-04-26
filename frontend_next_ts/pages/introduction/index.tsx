@@ -5,12 +5,15 @@ import Image from 'next/image'
 import useAnimationFrames from '../../hooks/useAnimationFrames'
 import Narrator from '../../components/Narrator'
 import { useAppSelector } from '../../redux/hooks'
+import useConfigureFoods from '../../hooks/useConfigureFoods'
 
 function IntroductionPage() {
 
   const animationFrameIdx = useAppSelector(state => state.animation.animationFrameIdx)
   const [displayNarrator, setDisplayNarrator] = useState<boolean>(true)
   const router = useRouter()
+
+  useConfigureFoods()
 
   useEffect(() => {
     if (animationFrameIdx === 13)

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './Plate.module.scss'
 import { useAppSelector } from '../../redux/hooks'
 import Image from 'next/image'
+import useConfigureFoods from '../../hooks/useConfigureFoods'
 
 type PlateProps = {
     nOfMissingFood: number,
@@ -12,19 +13,21 @@ function Plate({ nOfMissingFood, elementClass }: PlateProps) {
 
     const [foodsOnPlate, setFoodsOnPlate] = useState<string[]>([])
 
-    const carbs = useAppSelector((state) => state.foods.carbs)
-    const prots = useAppSelector((state) => state.foods.prots)
+    useConfigureFoods()
+
+    const foods = useAppSelector((state) => state.foods)
+
 
     useEffect(() => {
-        const randomCarb = carbs[Math.floor(Math.random() * carbs.length)]
-        const randomProt = prots[Math.floor(Math.random() * prots.length)]
+        const randomCarb = foods.carbs[Math.floor(Math.random() * foods.carbs.length)]
+        const randomProt = foods.prots[Math.floor(Math.random() * foods.prots.length)]
 
         if (nOfMissingFood === 1)
             setFoodsOnPlate([randomCarb, randomProt])
         else if (nOfMissingFood === 2)
             setFoodsOnPlate([randomCarb])
 
-    }, [])
+    }, [foods])
 
     return (
         <>
@@ -40,7 +43,7 @@ function Plate({ nOfMissingFood, elementClass }: PlateProps) {
                     <Image
                         id={styles[`plate-food-${idx + 1}`]}
                         src={food} className={styles['plate-foods']}
-                        alt='Comida'
+                        alt='Comida não arrastável'
                         width={1}
                         height={1}
                     />

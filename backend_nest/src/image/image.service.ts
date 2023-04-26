@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ImageDto } from './dto/image.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from './../prisma/prisma.service';
 const fs = require('fs')
 const path = require('path')
 
