@@ -3,7 +3,7 @@ Alimentação Balanceada, a game developed as an assignment for Universidade Tec
 
 In the frontend, it was used tools such as React, Redux, Sass and Bootstrap. In the backend, Node was used to create the server environment and PostgreSQL was used to manage the database.
 
-Link to website: http://dainf.pg.utfpr.edu.br/lesicjogos/alibal
+Link to website: http://dainf.pg.utfpr.edu.br/lesicjogos/alibal2
 
 To install it:
 - Build the frontend with the command **npm run build**, then copy and paste the build folder into the backend root. 
