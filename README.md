@@ -1,14 +1,14 @@
 # alimentacao-balanceada
 Alimentação Balanceada, a game developed as an assignment for Universidade Tecnológica Federal do Paraná. Implemented using React, Redux, Booststrap and Sass. 
 
-In the frontend, it was used tools such as React, Redux, Sass and Bootstrap. In the backend, Node was used to create the server environment and PostgreSQL was used to manage the database.
+In the frontend, it was used tools such as React, Next.js, Redux, Sass and Bootstrap. In the backend, Nest.js and Node were used to create the server environment and PostgreSQL was used to manage the database.
 
 Link to website: http://dainf.pg.utfpr.edu.br/lesicjogos/alibal2
 
 To install it:
-- Build the frontend with the command **npm run build**, then copy and paste the build folder into the backend root. 
+- Build the frontend and backend with the command **npm run build**.
 - Create the database and import the data from the file **alimentacao_balanceada_data**; after that, change the file **.env** in the backend to match your database setup.
-- After these steps, just run the backend with **node server.js**.
+- After these steps, just run the frontend and backend with **npm run start**.
 
 ![Captura de tela de 2022-09-09 13-20-01](https://user-images.githubusercontent.com/96545053/189396335-ff602f00-41fa-474b-9aa8-7b0f071cb149.png)
 
