@@ -9,7 +9,7 @@ function useGo2MenuIfNotLoggedInOrIsStudent() {
 
     useEffect(() => {
         if (gameMode === 'student' || !login) {
-            router.replace('/menu')
+            router.replace('/')
         }
     }, [])
 }

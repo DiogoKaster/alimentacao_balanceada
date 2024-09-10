@@ -2,18 +2,29 @@ import React, { useEffect, useState } from 'react'
 
 function usePlayAudio() {
 
+  const [audioSrc, setAudioSrc] = useState<string>('')
+  const [audioRef, setAudioRef] = useState<HTMLAudioElement | null>(null)
 
-    const [audioSrc, setAudioSrc] = useState<string>('')
+  useEffect(() => {
+    if (audioSrc) {
+      if (audioRef) {
+        audioRef.pause()
+        audioRef.currentTime = 0
+      }
 
-    useEffect(() => {
-        if (audioSrc) {
-            const audioRef = new Audio(audioSrc)
-            audioRef.play()
-        }
-    }, [audioSrc])
+      const newAudio = new Audio(audioSrc)
+      newAudio.play()
+      setAudioRef(newAudio) 
+    }
 
-    return setAudioSrc
+    return () => {
+      if (audioRef) {
+        audioRef.pause()
+      }
+    }
+  }, [audioSrc])
 
+  return setAudioSrc
 }
 
 export default usePlayAudio
