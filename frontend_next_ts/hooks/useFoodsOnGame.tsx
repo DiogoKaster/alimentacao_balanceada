@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import Answer from '../types/Answer'
 import { decreaseAnswer, increaseAnswer } from '../redux/states/answer'
@@ -22,13 +22,45 @@ function useFoodsOnGame(): [MappingFoodsOnGame, Function] {
         setUpFoodsState()
     }, [foods])
 
-    function setUpFoodsState() {
-        setFoodsOnGame([
-            foods.carbs[Math.floor(Math.random() * foods.carbs.length)],
-            foods.prots[Math.floor(Math.random() * foods.prots.length)],
-            foods.fats[Math.floor(Math.random() * foods.fats.length)]
-        ])
+    function shuffleArray(array: string[]) {
+        return array.sort(() => Math.random() - 0.5)
     }
+
+    function setUpFoodsState() {
+        const shuffledCarbs = shuffleArray([...foods.carbs])  // Cria uma cópia do array
+        const shuffledProts = shuffleArray([...foods.prots])  // Cria uma cópia do array
+        const shuffledFats = shuffleArray([...foods.fats])    // Cria uma cópia do array
+    
+        const selectedFoods = new Set<string>()
+    
+        // Adiciona o primeiro alimento de carboidrato
+        selectedFoods.add(shuffledCarbs[0])
+    
+        // Seleciona o primeiro alimento de proteínas que ainda não foi adicionado
+        for (const prot of shuffledProts) {
+            if (!selectedFoods.has(prot)) {
+                selectedFoods.add(prot)
+                break
+            }
+        }
+    
+        // Seleciona o primeiro alimento de gordura que ainda não foi adicionado
+        for (const fat of shuffledFats) {
+            if (!selectedFoods.has(fat)) {
+                selectedFoods.add(fat)
+                break
+            }
+        }
+    
+        // Garante que selecionamos 3 alimentos diferentes
+        if (selectedFoods.size === 3) {
+            setFoodsOnGame(Array.from(selectedFoods))  // Atribui uma nova cópia do array
+        } else {
+            // Tentar novamente se houver duplicatas
+            setUpFoodsState()
+        }
+    }
+    
 
     function handleOverlapping(isOverlapping: boolean, imgSrc: string,
         resetFoodPosition: Function) {

@@ -14,7 +14,7 @@ function usePlayAudio() {
 
       const newAudio = new Audio(audioSrc)
       newAudio.play()
-      setAudioRef(newAudio) 
+      setAudioRef(newAudio)
     }
 
     return () => {
