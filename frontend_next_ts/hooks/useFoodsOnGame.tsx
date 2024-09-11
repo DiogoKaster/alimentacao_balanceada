@@ -27,39 +27,44 @@ function useFoodsOnGame(): [MappingFoodsOnGame, Function] {
     }
 
     function setUpFoodsState() {
-        const shuffledCarbs = shuffleArray([...foods.carbs])  // Cria uma cópia do array
-        const shuffledProts = shuffleArray([...foods.prots])  // Cria uma cópia do array
-        const shuffledFats = shuffleArray([...foods.fats])    // Cria uma cópia do array
+        const maxAttempts = 10  // Defina um limite de tentativas para evitar loops infinitos
+        let attempts = 0
+        let selectedFoods = new Set<string>()
     
-        const selectedFoods = new Set<string>()
+        while (selectedFoods.size < 3 && attempts < maxAttempts) {
+            const shuffledCarbs = shuffleArray([...foods.carbs])  // Cópia do array
+            const shuffledProts = shuffleArray([...foods.prots])  // Cópia do array
+            const shuffledFats = shuffleArray([...foods.fats])    // Cópia do array
     
-        // Adiciona o primeiro alimento de carboidrato
-        selectedFoods.add(shuffledCarbs[0])
+            selectedFoods.clear()  // Limpa o conjunto a cada nova tentativa
     
-        // Seleciona o primeiro alimento de proteínas que ainda não foi adicionado
-        for (const prot of shuffledProts) {
-            if (!selectedFoods.has(prot)) {
-                selectedFoods.add(prot)
-                break
+            // Adiciona um alimento de cada tipo ao conjunto
+            selectedFoods.add(shuffledCarbs[0])
+    
+            for (const prot of shuffledProts) {
+                if (!selectedFoods.has(prot)) {
+                    selectedFoods.add(prot)
+                    break
+                }
             }
+    
+            for (const fat of shuffledFats) {
+                if (!selectedFoods.has(fat)) {
+                    selectedFoods.add(fat)
+                    break
+                }
+            }
+    
+            attempts++
         }
     
-        // Seleciona o primeiro alimento de gordura que ainda não foi adicionado
-        for (const fat of shuffledFats) {
-            if (!selectedFoods.has(fat)) {
-                selectedFoods.add(fat)
-                break
-            }
-        }
-    
-        // Garante que selecionamos 3 alimentos diferentes
         if (selectedFoods.size === 3) {
-            setFoodsOnGame(Array.from(selectedFoods))  // Atribui uma nova cópia do array
+            setFoodsOnGame(Array.from(selectedFoods))  // Define o estado com alimentos únicos
         } else {
-            // Tentar novamente se houver duplicatas
-            setUpFoodsState()
+            console.error("Não foi possível selecionar 3 alimentos únicos após várias tentativas.")
         }
     }
+    
     
 
     function handleOverlapping(isOverlapping: boolean, imgSrc: string,
