@@ -8,38 +8,18 @@ import Plate from '../../components/Plate'
 import styles from './../../styles/DragAndDropPage.module.scss'
 import useConfigureFoods from '../../hooks/useConfigureFoods'
 
-/*
-    If it's missing 1 food, the missing food will be a fat
-    If it's missing 2 foods, the missing foods will be a fat and a prot
-
-    if (nOfMissingFood === 1)
-            setFoodsOnPlate([randomCarb, randomProt])
-        else if (nOfMissingFood === 2)
-            setFoodsOnPlate([randomCarb])
-*/
-
-
 function DragAndDropPage() {
-
-  const audio1 = '/audios/d&d-1.aac'
-  const audio2 = '/audios/d&d-2.aac'
-  const audio3 = '/audios/d&d-3.aac'
-
+  const audioFiles = ['/audios/d&d-1.aac', '/audios/d&d-2.aac', '/audios/d&d-3.aac']
   const [round, setRound] = useState<number>(0)
   const [showFeedback, setShowFeedback] = useState(false)
 
-  const setUpAnswer =
-    useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound)
-
-  const plateClassName = 'plate-reference-from-drag-and-drop-page'
-
+  const setUpAnswer = useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound)
+  const plateClassName = 'plate-reference'
+  
   useConfigureFoods()
 
   const [mapFoodsOnGameToFoods, setUpFoodsState] = useFoodsOnGame()
-
   const router = useRouter()
-
-
   const setCurAudioBeingPlayed = usePlayAudio()
 
   useEffect(() => {
@@ -48,30 +28,18 @@ function DragAndDropPage() {
   }, [round])
 
   useEffect(() => {
-    if (!showFeedback)
-      setUpAudio()
+    if (!showFeedback) setUpAudio()
   }, [showFeedback])
 
   function setUpAudio() {
-    if (round === 0)
-      setCurAudioBeingPlayed(audio1)
-    if (round === 2)
-      setCurAudioBeingPlayed(audio2)
-    if (round === 4)
-      setCurAudioBeingPlayed(audio3)
+    const audioIndex = Math.floor(round / 2)
+    if (audioFiles[audioIndex]) setCurAudioBeingPlayed(audioFiles[audioIndex])
   }
 
   function howMuchFoodIsMissing() {
-    const isItMissing1Food = (round === 0 || round === 1)
-    const isItMissing2Foods = (round === 2 || round === 3)
-    const isItMissingAllFoods = (round === 4)
-
-    return (
-      isItMissing1Food ? 1 :
-        isItMissing2Foods ? 2 :
-          3
-    )
-
+    if (round <= 1) return 1
+    if (round <= 3) return 2
+    return 3
   }
 
   function isDragAndDropOver() {
@@ -79,38 +47,31 @@ function DragAndDropPage() {
   }
 
   function increaseRound() {
-    setRound((state) => state + 1)
+    setRound(prev => prev + 1)
   }
 
   function handleFeedbackButtonClick() {
-
-    if (isDragAndDropOver())
-      router.replace('/menu')
-
+    if (isDragAndDropOver()) router.replace('/menu')
     setShowFeedback(false)
   }
 
   return (
     <>
-      {
-        showFeedback ?
-          <Feedback variant={isDragAndDropOver() ? 'end' : 'positive'}
-            callback={handleFeedbackButtonClick} numStars={round} />
-          :
-          <div id={styles['drag-and-drop']}>
-            <h1>Arraste-e-solte</h1>
-
-            <div id={styles['balanced-alimentation']}>
-              <Plate
-                elementClass={plateClassName}
-                nOfMissingFood={howMuchFoodIsMissing()} />
-
-              {
-                mapFoodsOnGameToFoods(plateClassName)
-              }
-            </div>
+      {showFeedback ? (
+        <Feedback 
+          variant={isDragAndDropOver() ? 'end' : 'positive'}
+          callback={handleFeedbackButtonClick} 
+          numStars={round} 
+        />
+      ) : (
+        <div id={styles['drag-and-drop']}>
+          <h1>Arraste-e-solte</h1>
+          <div id={styles['balanced-alimentation']}>
+            <Plate elementClass={plateClassName} nOfMissingFood={howMuchFoodIsMissing()} />
+            {mapFoodsOnGameToFoods(plateClassName)}
           </div>
-      }
+        </div>
+      )}
     </>
   )
 }
