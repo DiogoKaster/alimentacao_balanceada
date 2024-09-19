@@ -15,12 +15,12 @@ function DragAndDropPage() {
 
   const setUpAnswer = useAnswer(howMuchFoodIsMissing, setShowFeedback, increaseRound)
   const plateClassName = 'plate-reference'
-  
+
   useConfigureFoods()
 
   const [mapFoodsOnGameToFoods, setUpFoodsState] = useFoodsOnGame()
   const router = useRouter()
-  const setCurAudioBeingPlayed = usePlayAudio()
+  const { playAudio, stopAudio } = usePlayAudio()
 
   useEffect(() => {
     setUpFoodsState()
@@ -28,12 +28,17 @@ function DragAndDropPage() {
   }, [round])
 
   useEffect(() => {
-    if (!showFeedback) setUpAudio()
+    // If feedback is showing, we prevent the round audio from playing
+    if (!showFeedback) {
+      setUpAudio()
+    } else {
+      stopAudio() // Stop any round-related audio when feedback is shown
+    }
   }, [showFeedback])
 
   function setUpAudio() {
     const audioIndex = Math.floor(round / 2)
-    if (audioFiles[audioIndex]) setCurAudioBeingPlayed(audioFiles[audioIndex])
+    if (audioFiles[audioIndex]) playAudio(audioFiles[audioIndex]) // Play the round-related audio
   }
 
   function howMuchFoodIsMissing() {

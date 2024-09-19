@@ -19,7 +19,7 @@ function QuizPage() {
 
   const router = useRouter()
 
-  const setAudioSrc = usePlayAudio()
+  const { playAudio, stopAudio } = usePlayAudio() // Updated to use playAudio and stopAudio
 
   useConfigureFoods()
 
@@ -28,112 +28,97 @@ function QuizPage() {
       let randomFood: string
       do {
         randomFood = foodArray[Math.floor(Math.random() * foodArray.length)]
-
       } while (options.includes(randomFood))
 
       return randomFood
     }
 
     const areFoodArraysNotDefined = carbs.length === 0
-    if (areFoodArraysNotDefined)
-      return
+    if (areFoodArraysNotDefined) return
 
     const carbFood = getRandomFood([], carbs)
     const protFood = getRandomFood([carbFood], prots)
     const fatFood = getRandomFood([carbFood, protFood], fats)
 
     setQuizOptions([carbFood, protFood, fatFood])
-
   }, [round, carbs, prots, fats])
 
   useEffect(() => {
-    if (isQuizOver())
-      setShowFeedback(true)
+    if (isQuizOver()) setShowFeedback(true)
   }, [round])
-
 
   useEffect(() => {
     const isItNewQuestion = !showFeedback && answeredCorrectly
-    if (!isItNewQuestion)
-      return
+    if (!isItNewQuestion) return
 
-    setAudioSrc(round2AudioMap[round])
+    // Play the audio associated with the current round
+    playAudio(round2AudioMap[round])
+  }, [showFeedback, answeredCorrectly])
 
-  }, [showFeedback])
-
-
-  const isItProteinRound = () => (round === 0 || round === 1)
-  const isItCarbRound = () => (round === 2 || round === 3)
-  const isItFatRound = () => (round === 4)
-  const isQuizOver = () => (round === 5)
+  const isItProteinRound = () => round === 0 || round === 1
+  const isItCarbRound = () => round === 2 || round === 3
+  const isItFatRound = () => round === 4
+  const isQuizOver = () => round === 5
 
   function handleOptionClick(option: string) {
-    if (isItCarbRound())
-      setAnsweredCorrectly(carbs.includes(option))
-    if (isItProteinRound())
-      setAnsweredCorrectly(prots.includes(option))
-    if (isItFatRound())
-      setAnsweredCorrectly(fats.includes(option))
+    // Check if the selected option is correct
+    if (isItCarbRound()) setAnsweredCorrectly(carbs.includes(option))
+    if (isItProteinRound()) setAnsweredCorrectly(prots.includes(option))
+    if (isItFatRound()) setAnsweredCorrectly(fats.includes(option))
 
+    // Stop any currently playing audio when showing feedback
+    stopAudio()
     setShowFeedback(true)
   }
 
   function handleFeedbackBtnClick() {
-    if (isQuizOver())
+    if (isQuizOver()) {
       router.replace('/menu')
-    else if (answeredCorrectly)
+    } else if (answeredCorrectly) {
       setRound((state) => state + 1)
+    }
 
     setShowFeedback(false)
   }
 
   function getFeedbackVariant() {
-    if (isQuizOver())
-      return 'end'
-    else if (answeredCorrectly)
-      return 'positive'
-    else
-      return 'negative'
+    if (isQuizOver()) return 'end'
+    else if (answeredCorrectly) return 'positive'
+    else return 'negative'
   }
 
   return (
-
     <>
-      {
-        showFeedback ?
-          <Feedback
-            variant={getFeedbackVariant()}
-            callback={handleFeedbackBtnClick}
-            numStars={round + 1}
-          /> :
+      {showFeedback ? (
+        <Feedback
+          variant={getFeedbackVariant()}
+          callback={handleFeedbackBtnClick}
+          numStars={round + 1}
+        />
+      ) : (
+        <article id={styles['quiz']}>
+          <h1>
+            Quais desses alimentos contém
+            {isItCarbRound() && ' muitos carboidratos'}
+            {isItProteinRound() && ' muitas proteínas'}
+            {isItFatRound() && ' muitas gorduras'}?
+          </h1>
 
-          <article id={styles['quiz']}>
-            <h1>
-              Quais desses alimentos contém
-              {isItCarbRound() && ' muitos carboidratos'}
-              {isItProteinRound() && ' muitas proteínas'}
-              {isItFatRound() && ' muitas gorduras'}
-              ?
-            </h1>
-
-            <div id={styles['quiz-options']}>
-              {
-                quizOptions.map((option, idx) => (
-                  <Image
-                    src={option}
-                    alt={`Opção ${idx + 1}`}
-                    className={styles['icon']}
-                    width={1}
-                    height={1}
-                    key={`quiz-option-${idx + 1}`}
-                    onClick={() => handleOptionClick(option)}
-                  />
-                ))
-              }
-            </div>
-
-          </article>
-      }
+          <div id={styles['quiz-options']}>
+            {quizOptions.map((option, idx) => (
+              <Image
+                src={option}
+                alt={`Opção ${idx + 1}`}
+                className={styles['icon']}
+                width={1}
+                height={1}
+                key={`quiz-option-${idx + 1}`}
+                onClick={() => handleOptionClick(option)}
+              />
+            ))}
+          </div>
+        </article>
+      )}
     </>
   )
 }

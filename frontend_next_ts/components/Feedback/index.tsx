@@ -13,15 +13,14 @@ type FeedbackProps = {
 
 function Feedback({ variant, callback, numStars = 0 }: FeedbackProps) {
 
-    const setCurAudioBeingPlayed = usePlayAudio()
+    const { playAudio, stopAudio } = usePlayAudio() // Updated to use playAudio and stopAudio
     const [starSize, setStarSize] = useState<40 | 80>(80)
 
     useEffect(() => {
-        setCurAudioBeingPlayed(state => (
-            `/audios/${variant}-feedback.aac`
-        )
-        )
-    }, [])
+        // Play the feedback audio and stop any round-related audio
+        stopAudio()
+        playAudio(`/audios/${variant}-feedback.aac`)
+    }, [variant])
 
     const windowSize = useWindowSize()
 
@@ -40,16 +39,6 @@ function Feedback({ variant, callback, numStars = 0 }: FeedbackProps) {
 
         setStarSize(getStarsSize())
     }, [windowSize])
-
-    function getStarsSize() {
-        const defaultSize = 80
-
-        if (typeof windowSize === 'undefined')
-            return defaultSize
-
-        if (windowSize.orientation === 'portrait')
-            return 40
-    }
 
     return (
         <article id={styles['feedback']}>

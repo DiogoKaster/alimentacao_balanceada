@@ -17,7 +17,6 @@ function DraggableFood({ imgSrc, overlappingObjectBoundingClass, isOverlappingCa
   const { position, isDragging, setIsDragging, handleDrag, resetPosition } = useDraggablePosition();
 
   useEffect(() => {
-    // Only check overlapping when not dragging
     if (!isDragging) {
       const isOverlapping = checkOverlap(componentRef, overlappingObjectBoundingClass);
       isOverlappingCallback(isOverlapping, imgSrc, resetPosition);
