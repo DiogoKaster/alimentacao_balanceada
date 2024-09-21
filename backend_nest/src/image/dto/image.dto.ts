@@ -1,18 +1,17 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator'
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class ImageDto {
+  filename: string;
 
-    filename: string
+  @IsString()
+  @IsNotEmpty()
+  is_it_carbs: string;
 
-    @IsString()
-    @IsNotEmpty()
-    is_it_carbs: string
+  @IsString()
+  @IsNotEmpty()
+  is_it_prots: string;
 
-    @IsString()
-    @IsNotEmpty()
-    is_it_prots: string
-
-    @IsString()
-    @IsNotEmpty()
-    is_it_fats: string
+  @IsString()
+  @IsNotEmpty()
+  is_it_fats: string;
 }

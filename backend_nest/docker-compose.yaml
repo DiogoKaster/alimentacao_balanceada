@@ -1,0 +1,11 @@
+services:
+  alimentacao-balanceada:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=utfpr
+      - POSTGRESQL_PASSWORD=utfpr
+      - POSTGRESQL_DATABASE=alimentacao_balanceada
+    volumes:
+      - ./db_initial_setup:/docker-entrypoint-initdb.d/db_initial_setup
