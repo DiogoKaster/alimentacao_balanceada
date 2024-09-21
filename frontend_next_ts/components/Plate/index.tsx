@@ -10,46 +10,47 @@ type PlateProps = {
 }
 
 function Plate({ nOfMissingFood, elementClass }: PlateProps) {
-
     const [foodsOnPlate, setFoodsOnPlate] = useState<string[]>([])
 
     useConfigureFoods()
 
     const foods = useAppSelector((state) => state.foods)
 
-
     useEffect(() => {
-        const randomCarb = foods.carbs[Math.floor(Math.random() * foods.carbs.length)]
-        const randomProt = foods.prots[Math.floor(Math.random() * foods.prots.length)]
+        if (foods.carbs.length && foods.prots.length) {
+            const randomCarb = foods.carbs[Math.floor(Math.random() * foods.carbs.length)]
+            const randomProt = foods.prots[Math.floor(Math.random() * foods.prots.length)]
 
-        if (nOfMissingFood === 1)
-            setFoodsOnPlate([randomCarb, randomProt])
-        else if (nOfMissingFood === 2)
-            setFoodsOnPlate([randomCarb])
-
-    }, [foods])
+            if (nOfMissingFood === 1) {
+                setFoodsOnPlate([randomCarb, randomProt])
+            } else if (nOfMissingFood === 2) {
+                setFoodsOnPlate([randomCarb])
+            }
+        }
+    }, [foods, nOfMissingFood]) // Adiciona nOfMissingFood como dependência
 
     return (
         <>
             <Image
                 id={styles['drag-and-drop-plate-img']}
-                className={elementClass} src='/imgs/plate-cropped.svg' alt='Prato'
-                width={10}
+                className={elementClass}
+                src='/imgs/plate-cropped.svg'
+                alt='Prato'
+                width={10} 
                 height={10}
             />
 
-            {
-                foodsOnPlate.map((food, idx) => (
-                    <Image
-                        id={styles[`plate-food-${idx + 1}`]}
-                        src={food} className={styles['plate-foods']}
-                        alt='Comida não arrastável'
-                        width={1}
-                        height={1}
-                    />
-                ))
-            }
-
+            {foodsOnPlate.map((food, idx) => (
+                <Image
+                    key={idx}  // Adiciona a chave
+                    id={styles[`plate-food-${idx + 1}`]}
+                    src={food}
+                    className={styles['plate-foods']}
+                    alt='Comida não arrastável'
+                    width={1} 
+                    height={1}
+                />
+            ))}
         </>
     )
 }
