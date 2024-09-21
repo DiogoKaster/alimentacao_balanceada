@@ -28,17 +28,16 @@ function DragAndDropPage() {
   }, [round])
 
   useEffect(() => {
-    // If feedback is showing, we prevent the round audio from playing
     if (!showFeedback) {
       setUpAudio()
     } else {
-      stopAudio() // Stop any round-related audio when feedback is shown
+      stopAudio()
     }
   }, [showFeedback])
 
   function setUpAudio() {
     const audioIndex = Math.floor(round / 2)
-    if (audioFiles[audioIndex]) playAudio(audioFiles[audioIndex]) // Play the round-related audio
+    if (audioFiles[audioIndex]) playAudio(audioFiles[audioIndex])
   }
 
   function howMuchFoodIsMissing() {

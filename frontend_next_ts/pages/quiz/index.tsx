@@ -1,90 +1,79 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { useAppSelector } from '../../redux/hooks'
-import { useRouter } from 'next/router'
-import styles from './../../styles/QuizPage.module.scss'
-import usePlayAudio from '../../hooks/usePlayAudio'
-import round2AudioMap from '../../utils/round2AudioMap'
-import Feedback from '../../components/Feedback'
-import Image from 'next/image'
-import useConfigureFoods from '../../hooks/useConfigureFoods'
+import React, { useEffect, useState } from 'react';
+import { useAppSelector } from '../../redux/hooks';
+import { useRouter } from 'next/router';
+import styles from './../../styles/QuizPage.module.scss';
+import usePlayAudio from '../../hooks/usePlayAudio';
+import round2AudioMap from '../../utils/round2AudioMap';
+import Feedback from '../../components/Feedback';
+import Image from 'next/image';
+import useConfigureFoods from '../../hooks/useConfigureFoods';
+import { getRandomFood } from '../../utils/getRandomFood'; 
 
 function QuizPage() {
-  const [round, setRound] = useState<number>(0)
-  const [quizOptions, setQuizOptions] = useState<string[]>([])
-  const [showFeedback, setShowFeedback] = useState<boolean>(false)
-  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean>(true)
-  const carbs = useAppSelector((state) => state.foods.carbs)
-  const prots = useAppSelector((state) => state.foods.prots)
-  const fats = useAppSelector((state) => state.foods.fats)
+  const [round, setRound] = useState<number>(0);
+  const [quizOptions, setQuizOptions] = useState<string[]>([]);
+  const [showFeedback, setShowFeedback] = useState<boolean>(false);
+  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean>(true);
+  const carbs = useAppSelector((state) => state.foods.carbs);
+  const prots = useAppSelector((state) => state.foods.prots);
+  const fats = useAppSelector((state) => state.foods.fats);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const { playAudio, stopAudio } = usePlayAudio() // Updated to use playAudio and stopAudio
+  const { playAudio, stopAudio } = usePlayAudio();
 
-  useConfigureFoods()
-
-  useLayoutEffect(() => {
-    function getRandomFood(options: string[], foodArray: string[]) {
-      let randomFood: string
-      do {
-        randomFood = foodArray[Math.floor(Math.random() * foodArray.length)]
-      } while (options.includes(randomFood))
-
-      return randomFood
-    }
-
-    const areFoodArraysNotDefined = carbs.length === 0
-    if (areFoodArraysNotDefined) return
-
-    const carbFood = getRandomFood([], carbs)
-    const protFood = getRandomFood([carbFood], prots)
-    const fatFood = getRandomFood([carbFood, protFood], fats)
-
-    setQuizOptions([carbFood, protFood, fatFood])
-  }, [round, carbs, prots, fats])
+  useConfigureFoods();
 
   useEffect(() => {
-    if (isQuizOver()) setShowFeedback(true)
-  }, [round])
+    const areFoodArraysNotDefined = carbs.length === 0;
+    if (areFoodArraysNotDefined) return;
+
+    const carbFood = getRandomFood(carbs);
+    const protFood = getRandomFood(prots, [carbFood]);
+    const fatFood = getRandomFood(fats, [carbFood, protFood]);
+
+    setQuizOptions([carbFood, protFood, fatFood]);
+  }, [round, carbs, prots, fats]);
 
   useEffect(() => {
-    const isItNewQuestion = !showFeedback && answeredCorrectly
-    if (!isItNewQuestion) return
+    if (isQuizOver()) setShowFeedback(true);
+  }, [round]);
 
-    // Play the audio associated with the current round
-    playAudio(round2AudioMap[round])
-  }, [showFeedback, answeredCorrectly])
+  useEffect(() => {
+    const isItNewQuestion = !showFeedback && answeredCorrectly;
+    if (!isItNewQuestion) return;
 
-  const isItProteinRound = () => round === 0 || round === 1
-  const isItCarbRound = () => round === 2 || round === 3
-  const isItFatRound = () => round === 4
-  const isQuizOver = () => round === 5
+    playAudio(round2AudioMap[round]);
+  }, [showFeedback, answeredCorrectly]);
+
+  const isItProteinRound = () => round === 0 || round === 1;
+  const isItCarbRound = () => round === 2 || round === 3;
+  const isItFatRound = () => round === 4;
+  const isQuizOver = () => round === 5;
 
   function handleOptionClick(option: string) {
-    // Check if the selected option is correct
-    if (isItCarbRound()) setAnsweredCorrectly(carbs.includes(option))
-    if (isItProteinRound()) setAnsweredCorrectly(prots.includes(option))
-    if (isItFatRound()) setAnsweredCorrectly(fats.includes(option))
+    if (isItCarbRound()) setAnsweredCorrectly(carbs.includes(option));
+    if (isItProteinRound()) setAnsweredCorrectly(prots.includes(option));
+    if (isItFatRound()) setAnsweredCorrectly(fats.includes(option));
 
-    // Stop any currently playing audio when showing feedback
-    stopAudio()
-    setShowFeedback(true)
+    stopAudio();
+    setShowFeedback(true);
   }
 
   function handleFeedbackBtnClick() {
     if (isQuizOver()) {
-      router.replace('/menu')
+      router.replace('/menu');
     } else if (answeredCorrectly) {
-      setRound((state) => state + 1)
+      setRound((state) => state + 1);
     }
 
-    setShowFeedback(false)
+    setShowFeedback(false);
   }
 
   function getFeedbackVariant() {
-    if (isQuizOver()) return 'end'
-    else if (answeredCorrectly) return 'positive'
-    else return 'negative'
+    if (isQuizOver()) return 'end';
+    else if (answeredCorrectly) return 'positive';
+    else return 'negative';
   }
 
   return (
@@ -120,7 +109,7 @@ function QuizPage() {
         </article>
       )}
     </>
-  )
+  );
 }
 
-export default QuizPage
+export default QuizPage;
